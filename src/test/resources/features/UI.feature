@@ -3,33 +3,33 @@ Feature: UI tests
 
   @e2e
   Scenario: Create a new user
-    Given I navigate to login page
-    When I click on 'Sign Up Button'
-    Then user is on the 'Add User' page
-    And I complete the following fields on page
+    Given User navigates to the login page
+    When User clicks on 'Sign Up Button'
+    Then User is on the 'Add User' page
+    And User completes the following fields on the page
       | Fields        | Values            |
       | Email         | [GENERATED_EMAIL] |
       | Password      | [PASSWORD]        |
       | firstName     | [FIRST_NAME]      |
       | lastName      | [LAST_NAME]       |
       | submit Button |                   |
-    Then user is on the 'Contact List' page
+    Then User is on the 'Contact List' page
 
   @e2e
   Scenario: Log in with the newly created user
-    Given I navigate to login page
-    And I complete the following fields on page
+    Given User navigates to the login page
+    And User completes the following fields on the page
       | Fields    | Values            |
       | Username  | [GENERATED_EMAIL] |
       | Password  | [PASSWORD]        |
-    When I click on 'submit Button'
-    Then user is on the 'Contact List' page
-    Then  the table 'contactTable ' not includes the following records
+    When User clicks on 'submit Button'
+    Then User is on the 'Contact List' page
+    Then The table 'contactTable ' not includes the following records
       | Name | Birthdate | Email | Phone | Address | City, State/Province, Postal Code | Country |
       |      |           |       |       |         |                                   |         |
-    When I click on 'add New Contact Button'
-    Then user is on the 'Add Contact' page
-    And I complete the following fields on page
+    When User clicks on 'add New Contact Button'
+    Then User is on the 'Add Contact' page
+    And User completes the following fields on the page
       | Fields          | Values                     |
       | firstName       | [FIRST_NAME]               |
       | lastName        | [LAST_NAME]                |
@@ -43,13 +43,13 @@ Feature: UI tests
       | postalCode      | [GENERATED_POSTCODE]       |
       | country         | [GENERATED_COUNTRY]        |
       | submit Button   |                            |
-    Then user is on the 'Contact List' page
-    Then  the table 'contactTable' includes the following records
+    Then User is on the 'Contact List' page
+    Then The table 'contactTable' includes the following records
       | Birthdate  | Email             | Phone          | Country             |
       | 2000-05-20 | [GENERATED_EMAIL] | [PHONE_NUMBER] | [GENERATED_COUNTRY] |
-    When I click on 'contact Details Button'
-    Then user is on the 'Contact Details' page
-    Then the following fields should be displayed with values
+    When User clicks on 'contact Details Button'
+    Then User is on the 'Contact Details' page
+    Then The following fields should be displayed with values
       | Fields        | Values             |
       | firstName       | [FIRST_NAME]               |
       | lastName        | [LAST_NAME]                |
@@ -65,14 +65,14 @@ Feature: UI tests
 
 
   Scenario: Log in with the existing user
-    Given I navigate to login page
-    And I complete the following fields on page
+    Given User navigates to the login page
+    And User completes the following fields on the page
       | Fields    | Values            |
       | Username  | api041224145058@clrmail.com |
       | Password  | Test1234        |
-    When I click on 'submit Button'
-    Then user is on the 'Contact List' page
-    Then  the table 'contactTable' includes the following records
+    When User clicks on 'submit Button'
+    Then User is on the 'Contact List' page
+    Then The table 'contactTable' includes the following records
       | Birthdate  | Email                          | Phone       | Country      |
       | 2000-05-20 | portal101224190514@clrmail.com | 34809789312 | Bedfordshire |
       | 2000-05-20 | portal041224185302@clrmail.com | 90918606820 | Bedfordshire |
@@ -99,13 +99,13 @@ Feature: UI tests
 
 
   Scenario Outline: Log in with invalid or empty user email
-    Given I navigate to login page
-    Then I am on the 'Portal Login Page' page
-    And I complete the following fields on page
+    Given User navigates to the login page
+    Then User is on the 'Portal Login' page
+    And User completes the following fields on the page
       | Fields   | Values          |
       | Username | <Invalid Email> |
       | Password | Test1234        |
-    When I click on 'submit Button'
+    When User clicks on 'submit Button'
     Then Error Message is displayed with value: 'Incorrect username or password'
     Examples:
       | Invalid Email             |

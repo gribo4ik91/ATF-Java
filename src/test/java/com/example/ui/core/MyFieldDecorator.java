@@ -53,12 +53,7 @@ public class MyFieldDecorator extends DefaultFieldDecorator {
         if (Group.class.isAssignableFrom(fieldType)) {
             return decorateGroup(field);
         }
-//        if (Module.class.isAssignableFrom(fieldType)) {
-//            return decorateModule(loader, field);
-//        }
-//        if (GroupModule.class.isAssignableFrom(fieldType)) {
-//            return decorateGroupModule(field);
-//        }
+
         return super.decorate(loader, field);
     }
 
@@ -72,10 +67,6 @@ public class MyFieldDecorator extends DefaultFieldDecorator {
         return proxy;
     }
 
-//    private Object decorateModule(final ClassLoader loader, final Field field) {
-//        var element = proxyForLocator(loader, factory.createLocator(field));
-//        return buildModule(element, field.getType());
-//    }
 
     private Object decorateContainer(final ClassLoader loader, final Field field) {
         var element = proxyForLocator(loader, factory.createLocator(field));
@@ -109,32 +100,5 @@ public class MyFieldDecorator extends DefaultFieldDecorator {
         });
     }
 
-//    @SuppressWarnings("unchecked")
-//    private <T extends Module> Object decorateGroupModule(final Field field) {
-//        return Enhancer.create(GroupModule.class, (InvocationHandler) (obj, method, args) -> {
-//            var elements = factory.createLocator(field).findElements();
-//            var genericTypeName = ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0].getTypeName();
-//            ArrayList<T> output = new ArrayList<>();
-//            for (var element : elements) {
-//                try {
-//                    output.add(buildModule(element, (Class<T>) Class.forName(genericTypeName)));
-//                } catch (ClassNotFoundException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//            return method.invoke(new GroupModule(output), args);
-//        });
-//    }
 
-//    private <T> T buildModule(SearchContext searchContext, Class<T> fieldType) {
-//        var factory = new MyElementLocatorFactory(searchContext, ELEMENT_WAIT_TIMEOUT);
-//        try {
-//            return fieldType
-//                    .getDeclaredConstructor(FieldDecorator.class)
-//                    .newInstance(new MyFieldDecorator(browser, factory));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
 }

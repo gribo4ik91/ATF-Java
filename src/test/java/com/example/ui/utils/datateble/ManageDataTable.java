@@ -89,18 +89,6 @@ public class ManageDataTable {
         ATFAssert.assertThat(String.format("The rows should not be displayed in the table.\n%s", DataTable.create(filteredRows)), filteredRows.size(), is(0));
     }
 
-//    public List<List<String>> transpose(List<List<String>> table) {
-//        List<List<String>> results = new ArrayList<>();
-//        final int size = table.stream().max(Comparator.comparing(List::size)).get().size();
-//        for (int i = 0; i < size; i++) {
-//            List<String> col = new ArrayList<>();
-//            for (List<String> row : table) {
-//                col.add(row.size() > i ? row.get(i) : "");
-//            }
-//            results.add(col);
-//        }
-//        return results;
-//    }
 
 }
 

@@ -31,12 +31,6 @@ public abstract class AbstractAction {
         this.browser = browser;
     }
 
-//    private void updateIndexIfNewTest() {
-//        if (!currentLogName.equals(TestLogHelper.getCurrentLogName())) {
-//            currentLogName = TestLogHelper.getCurrentLogName();
-//            final int screenshotIndex = 1;
-//        }
-//    }
 
     protected void execute(Runnable action) {
         browser.waitCurrentPageToLoad();
@@ -100,17 +94,6 @@ public abstract class AbstractAction {
         return null;
     }
 
-//    private void takeScreenShotBefore() {
-//        takeScreenShot("before");
-//    }
-//
-//    private void takeScreenShotAfter() {
-//        takeScreenShot("after");
-//    }
-//
-//    private void takeScreenShot(String beforeOrAfter) {
-//        browser.takeScreenShot(beforeOrAfter + element.getName(), element.getWrappedElement());
-//    }
 
     private Boolean isClickAction(Runnable action) {
         return action.getClass().getSimpleName().contains("Click");

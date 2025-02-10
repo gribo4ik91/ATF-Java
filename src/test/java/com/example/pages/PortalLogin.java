@@ -4,13 +4,11 @@ import com.example.elements.impl.InputText;
 import com.example.elements.impl.Button;
 import com.example.elements.impl.Span;
 import com.example.ui.core.AbstractPage;
-import com.example.ui.core.FindByName;
 import com.example.ui.core.Page;
 import com.example.ui.core.browser.Browser;
 
 import lombok.Getter;
 
-import net.datafaker.providers.base.Text;
 import org.openqa.selenium.support.FindBy;
 
 
@@ -18,7 +16,7 @@ import java.awt.*;
 
 @Getter
 @Page(name = "Portal Login Page", url = "")
-public class PortalLoginPage extends AbstractPage {
+public class PortalLogin extends AbstractPage {
 
     @FindBy(className = "login_logo")
     private Label loginLogo;
@@ -45,7 +43,7 @@ public class PortalLoginPage extends AbstractPage {
     @FindBy(id = "signup")
     private Button signUpButton;
 
-    public PortalLoginPage(Browser browser) {
+    public PortalLogin(Browser browser) {
         super(browser);
     }
 }

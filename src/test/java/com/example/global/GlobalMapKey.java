@@ -47,16 +47,12 @@ public enum GlobalMapKey {
         this.description = description;
     }
 
-//    public static GlobalMapKey getByDescription(String description) {
-//        return Arrays.stream(GlobalMapKey.values()).filter(d -> d.getDescription().equals(description)).findFirst().orElse(null);
-//    }
+
 public String getDescription() {
     return description;
 }
     public static GlobalMapKey getByName(String name) {
         return Arrays.stream(GlobalMapKey.values()).filter(d -> d.name().equals(name)).findFirst().orElse(null);
     }
-//    public static GlobalMapKey getByDescription(String description) {
-//        return Arrays.stream(GlobalMapKey.values()).filter(d -> d.getDescription().equals(description)).findFirst().orElse(null);
-//    }
+
 }

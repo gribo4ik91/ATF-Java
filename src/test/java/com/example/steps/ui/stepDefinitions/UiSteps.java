@@ -3,7 +3,7 @@ package com.example.steps.ui.stepDefinitions;
 import com.example.elements.IButton;
 import com.example.elements.impl.table.Table;
 
-import com.example.pages.PortalLoginPage;
+import com.example.pages.PortalLogin;
 
 import com.example.ui.core.browser.Browser;
 import com.example.ui.utils.datateble.ManageDataTable;
@@ -71,7 +71,7 @@ public class UiSteps {
 
 
     @Given("I am on the {string} page")
-    @Given("user is on the {string} page")
+    @Given("User is on the {string} page")
     public void userIsOnPage(String pageName) {
         var page = WaitUtils.waitUntilNotNull(() -> browser.findPageByName(pageName), defaultUiPageTimeout);
         assertNotNull(pageName + " page not found or cannot be initiated", page);
@@ -80,6 +80,7 @@ public class UiSteps {
 
 
     @When("I click on {string}")
+    @When("User clicks on {string}")
     public void clickOnElement(String elementName) {
         var field = WaitUtils.waitUntilNotNull(() -> (IButton) browser.findElementContainer(elementName), defaultUiTimeout);
         assertNotNull(elementName, field);
@@ -100,7 +101,7 @@ public class UiSteps {
 //            assertThat(elementName.getText(), containsString(value));
 //        }
 //    }
-    @Then("^the table '(.*)' (matches|includes|not includes) the following records$")
+    @Then("^The table '(.*)' (matches|includes|not includes) the following records$")
     public void tableMatchesRecords(String elementName, String status, DataTable dataTable) {
         final var tableComponent = (Table) browser.findElementContainer(elementName);
 
@@ -119,9 +120,9 @@ public class UiSteps {
         }
     }
 
-    @Then("the following field is displayed with values")
-    @Then("the following fields are displayed with values")
-    @Then("the following field(s) should be displayed with values")
+    @Then("The following field is displayed with values")
+    @Then("The following fields are displayed with values")
+    @Then("The following field(s) should be displayed with values")
     public void theFollowingFieldsShouldBeDisplayedWithValues(DataTable dataTable) {
         for (Map<String, String> row : dataTable.asMaps()) {
             var field = row.get("Fields");
@@ -156,15 +157,7 @@ public class UiSteps {
 
 
 
-
-
-
-
-
-
-
-
-    @When("I complete the following fields on page")
+    @When("User completes the following fields on the page")
     public void completeElementsOnPage( DataTable dataTable) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
             for (Map<String, String> row : dataTable.asMaps()) {
@@ -185,10 +178,10 @@ public class UiSteps {
         }
     }
 
-    @When("I navigate to login page")
+    @When("User navigates to the login page")
     public void navigateToLoginPage() {
-        browser.goToUrl(env.getProperty("google.search.url"));
-        var loginPage = (PortalLoginPage) browser.findPageByName("Portal Login Page");
+        browser.goToUrl(env.getProperty("home.page.url"));
+        var loginPage = (PortalLogin) browser.findPageByName("Portal Login");
         browser.verifyAndSetPage(loginPage);
 
     }

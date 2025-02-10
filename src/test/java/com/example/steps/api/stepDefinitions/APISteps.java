@@ -62,6 +62,7 @@ public class APISteps {
         return null;
     }
 
+    @When("User adds a (contact|user) with the following details:$")
     @When("I add a (contact|user) with the following details:$")
     public void addContact(String type, DataTable dataTable) throws IOException {
         Contact contact = new Contact();
@@ -111,8 +112,8 @@ public class APISteps {
         }
     }
 
-    @When("I logged in with the new user")
-    @And("New user can log in")
+    @When("User is logged in as the new user")
+    @And("A new user can log in")
     public void newUserCanLogIn() throws IOException {
         var email = GlobalMap.getInstance().get(GENERATED_EMAIL);
         var password = GlobalMap.getInstance().get(PASSWORD);

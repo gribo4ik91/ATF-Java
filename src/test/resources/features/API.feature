@@ -31,19 +31,19 @@ Feature:  API Tests
       | email         | [GENERATED_EMAIL]          |
       | Password      | [PASSWORD]        |
     Then the response status code should be '201'
-    And New user can log in
+    And A new user can log in
     Then the response status code should be '200'
 
 
   Scenario: Login and logout with a new user successfully
-    When I logged in with the new user
+    When User is logged in as the new user
     Then the response status code should be '200'
     And I can logout successfully with the new user
     Then the response status code should be '200'
 
 
   Scenario: Login and delete  new user successfully
-    When I logged in with the new user
+    When User is logged in as the new user
     Then the response status code should be '200'
     And I can delete a new user
     Then the response status code should be '200'
