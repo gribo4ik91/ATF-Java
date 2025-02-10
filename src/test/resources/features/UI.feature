@@ -2,7 +2,7 @@
 Feature: UI tests
 
   @e2e
-  Scenario: Create a new user
+  Scenario: Create a new user and Log in with the newly created user
     Given User navigates to the login page
     When User clicks on 'Sign Up Button'
     Then User is on the 'Add User' page
@@ -14,15 +14,12 @@ Feature: UI tests
       | lastName      | [LAST_NAME]       |
       | submit Button |                   |
     Then User is on the 'Contact List' page
-
-  @e2e
-  Scenario: Log in with the newly created user
-    Given User navigates to the login page
-    And User completes the following fields on the page
+    And User navigates to the login page
+    Then User completes the following fields on the page
       | Fields    | Values            |
       | Username  | [GENERATED_EMAIL] |
       | Password  | [PASSWORD]        |
-    When User clicks on 'submit Button'
+    And User clicks on 'submit Button'
     Then User is on the 'Contact List' page
     Then The table 'contactTable ' not includes the following records
       | Name | Birthdate | Email | Phone | Address | City, State/Province, Postal Code | Country |
