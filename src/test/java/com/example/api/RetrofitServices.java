@@ -25,7 +25,7 @@ public class RetrofitServices extends RetrofitFactory {
     private String addUserToken;
 
     public ApiService getAuthorizationService() {
-        return new Builder(environment.getProperty("google.search.url"))
+        return new Builder(environment.getProperty("home.page.url"))
                 .headers(Map.of( "Content-Type", "application/json",
                         "Authorization", token))
                 .build()
@@ -33,7 +33,7 @@ public class RetrofitServices extends RetrofitFactory {
     }
 
     public ApiService getAuthorizationServiceForAddUser() {
-        return new Builder(environment.getProperty("google.search.url"))
+        return new Builder(environment.getProperty("home.page.url"))
                 .headers(Map.of( "Content-Type", "application/json",
                         "Authorization", addUserToken))
                 .build()
@@ -42,7 +42,7 @@ public class RetrofitServices extends RetrofitFactory {
 
     public ApiService getAuthorizationServiceWithNewToken() {
         LoginResponse newToken = (LoginResponse) GlobalMap.getInstance().get(HTTP_RESPONSE_BODY);
-        return new Builder(environment.getProperty("google.search.url"))
+        return new Builder(environment.getProperty("home.page.url"))
                 .headers(Map.of(
                         "Authorization", "Bearer " + newToken.getToken()))
                 .build()

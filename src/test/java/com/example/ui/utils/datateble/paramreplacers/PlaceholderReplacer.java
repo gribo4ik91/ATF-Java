@@ -13,55 +13,53 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-
-/**
- * The type HashParamReplacer contains the logic of replacing data from string with values from GlobalMap instance by GlobalMapKey (if are present)
- */
 @Slf4j
 public class PlaceholderReplacer {
 
-    private final static String bracketPattern = "\\[%s\\]";
 
+    private final static String bracketPattern = "\\[%s\\]";
     private final static String withoutBracketPattern = "\\[([^\\[\\]]*)]";
 
-    /**
-     * Replace all items in a string identifying matchers by "[","]" brackets.
-     *
-     * @return the string result with values from GlobalMap instance
-     *
-     * Example: @param text "[EMAIL] " -> return "example@getnada.com " (saved value in GlobalMap)
-     */
-
     public String replaceAll(final String text) {
-        var result = text;
+        String result = text;
 
         Matcher matcher = Pattern.compile(withoutBracketPattern).matcher(result);
         List<String> found = new ArrayList<>();
+
+        // Сначала находим все ключи внутри квадратных скобок
         while (matcher.find()) {
             found.add(matcher.group(1));
         }
 
+        // Обрабатываем каждый ключ
         for (int i = 0; i < found.size(); i++) {
-            var keyName = found.get(i);
-            var initialPattern = String.format(bracketPattern, keyName);
+            String keyName = found.get(i);
+            String initialPattern = String.format(bracketPattern, keyName);
 
             GlobalMapKey mapKey = GlobalMapKey.getByName(keyName);
-            var data = GlobalMap.getInstance().getOrDefault(mapKey, initialPattern);
+            Object data = GlobalMap.getInstance().getOrDefault(mapKey, initialPattern);
 
-            if (String.class.isAssignableFrom(data.getClass())) {
+            // Если данные - строка, просто заменяем
+            if (data instanceof String) {
                 result = result.replaceAll(initialPattern, (String) data);
-            } else if (Map.class.isAssignableFrom(data.getClass())) {
-                var key = found.get(i + 1);
-                var value = (((Map) data).get(key));
-
-                if (value != null) {
-                    String pattern = String.format(bracketPattern.repeat(2), keyName, key);
-                    result = result.replaceFirst(pattern, (String) value);
-                    i++;
+            }
+            // Если данные - Map, пытаемся заменить значение в зависимости от следующего ключа
+            else if (data instanceof Map) {
+                if (i + 1 < found.size()) {
+                    String nextKey = found.get(i + 1);
+                    Map<?, ?> map = (Map<?, ?>) data;
+                    Object value = map.get(nextKey);
+                    if (value instanceof String) {
+                        String nestedPattern = String.format("\\[%s\\]\\[%s\\]", keyName, nextKey);
+                        result = result.replaceFirst(Pattern.quote(nestedPattern), (String) value);
+                        i++;  // Пропускаем следующий элемент, так как он уже обработан
+                    }
                 }
             }
         }
+
         return result;
     }
+
 
 }

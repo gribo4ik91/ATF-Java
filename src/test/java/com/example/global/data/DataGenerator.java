@@ -24,12 +24,12 @@ public class DataGenerator {
     private String domain;
 
 
-    public String createEmail(EnvironmentPrefix environmentPrefix) {
-        return createEmail(environmentPrefix, DateTimeFormatter.ofPattern("ddMMyyHHmmss"));
+    public String createEmail() {
+        return createEmail("test", DateTimeFormatter.ofPattern("ddMMyyHHmmss"));
     }
 
 
-    public String createEmail(EnvironmentPrefix environmentPrefix, DateTimeFormatter dateTimeFormat) {
+    public String createEmail(String environmentPrefix, DateTimeFormatter dateTimeFormat) {
         LocalDateTime now = LocalDateTime.now();
         final String emailPrefix = String.format("%s%s", environmentPrefix, now.format(dateTimeFormat));
 
@@ -58,20 +58,20 @@ public class DataGenerator {
     }
 
 
-    public enum EnvironmentPrefix {
-        PORTAL("portal"),
-        REST("api");
-
-        private String env;
-
-        EnvironmentPrefix(String env) {
-            this.env = env;
-        }
-
-        public String toString() {
-            return env;
-        }
-    }
+//    public enum EnvironmentPrefix {
+//        PORTAL("portal"),
+//        REST("api");
+//
+//        private String env;
+//
+//        EnvironmentPrefix(String env) {
+//            this.env = env;
+//        }
+//
+//        public String toString() {
+//            return env;
+//        }
+//    }
 
 
 }

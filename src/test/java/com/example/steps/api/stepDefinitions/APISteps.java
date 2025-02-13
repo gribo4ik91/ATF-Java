@@ -26,7 +26,7 @@ import static com.example.ATFAssert.*;
 import static com.example.ATFHTTPAssert.assertStatus;
 import static com.example.global.GlobalMapKey.*;
 import static java.util.Objects.requireNonNull;
-import static org.assertj.core.api.BDDAssumptions.given;
+
 
 @Slf4j
 public class APISteps {
@@ -147,25 +147,12 @@ public class APISteps {
 
     }
 
-    public static String getValueIgnoreCase(Map<String, String> map, String key) {
-        for (Map.Entry<String, String> entry : map.entrySet()) {
-            if (entry.getKey().equalsIgnoreCase(key)) {
-                return entry.getValue();
-            }
-        }
-        return null; // Возвращаем null, если ключ не найден
-    }
 
     @Then("the response status code should be {string}")
     public void theResponseStatusCodeShouldBe(String responseCode) {
         checkStatusResponseCode(HttpStatus.valueOfString(responseCode));
     }
 
-    public void checkStatusResponseCode(HttpStatus responseCode) {
-        int actualResponseStatus = (int) GlobalMap.getInstance().get(HTTP_RESPONSE_CODE);
-
-        assertStatus(actualResponseStatus, requireNonNull(responseCode));
-    }
 
     @Then("the contact should appear in the contact list")
     public void getContactList() throws IOException {
@@ -173,18 +160,6 @@ public class APISteps {
         storeHttpResponse(response);
     }
 
-
-    private void compareContactResponse(final Contact myContactFromResponse) {
-        var request = GlobalMap.getInstance().get(GENERATED_REQUEST);
-        //  User authenticatedUser = GlobalMap.getInstance().getAs(HTTP_RESPONSE_BODY, User.class);
-        auth.compareContact((Contact) request, myContactFromResponse);
-    }
-
-    private void compareUserResponse(final User myContactFromResponse) {
-        var request = GlobalMap.getInstance().get(GENERATED_REQUEST);
-        //  User authenticatedUser = GlobalMap.getInstance().getAs(HTTP_RESPONSE_BODY, User.class);
-        auth.compareUsers((User) request, myContactFromResponse);
-    }
 
     @Then("I should see my contact in the list")
     public void iShouldSeeMyContactInTheList() throws IOException {
@@ -205,6 +180,39 @@ public class APISteps {
         assertNotNull("response", contacts);
 
     }
+
+
+
+
+    public static String getValueIgnoreCase(Map<String, String> map, String key) {
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            if (entry.getKey().equalsIgnoreCase(key)) {
+                return entry.getValue();
+            }
+        }
+        return null; // Возвращаем null, если ключ не найден
+    }
+
+
+    public void checkStatusResponseCode(HttpStatus responseCode) {
+        int actualResponseStatus = (int) GlobalMap.getInstance().get(HTTP_RESPONSE_CODE);
+
+        assertStatus(actualResponseStatus, requireNonNull(responseCode));
+    }
+
+
+    private void compareContactResponse(final Contact myContactFromResponse) {
+        var request = GlobalMap.getInstance().get(GENERATED_REQUEST);
+        //  User authenticatedUser = GlobalMap.getInstance().getAs(HTTP_RESPONSE_BODY, User.class);
+        auth.compareContact((Contact) request, myContactFromResponse);
+    }
+
+    private void compareUserResponse(final User myContactFromResponse) {
+        var request = GlobalMap.getInstance().get(GENERATED_REQUEST);
+        //  User authenticatedUser = GlobalMap.getInstance().getAs(HTTP_RESPONSE_BODY, User.class);
+        auth.compareUsers((User) request, myContactFromResponse);
+    }
+
 
 }
 

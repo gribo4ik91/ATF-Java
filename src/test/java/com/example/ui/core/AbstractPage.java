@@ -11,15 +11,9 @@ public class AbstractPage {
         PageFactory.initElements(new MyFieldDecorator(browser), this);
     }
 
-//    public String getUrl() {
-//        return getClass().getAnnotation(Page.class).url();
-//    }
 
     public ExpectedCondition<Boolean> getWaitCondition() {
         return null;
     }
 
-//    public String getPageName(){
-//        return getClass().getAnnotation(Page.class).name();
-//    }
 }

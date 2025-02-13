@@ -14,7 +14,6 @@ public class ClickAction extends AbstractAction {
     }
 
     public void execute() {
-        browser.scrollToElement(element.getWrappedElement());
         super.execute(() -> element.getWrappedElement().click());
         log.info("[ACTION] Clicked content of element: " + element.getName());
     }

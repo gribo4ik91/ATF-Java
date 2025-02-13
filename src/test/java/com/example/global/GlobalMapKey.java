@@ -51,6 +51,7 @@ public enum GlobalMapKey {
 public String getDescription() {
     return description;
 }
+
     public static GlobalMapKey getByName(String name) {
         return Arrays.stream(GlobalMapKey.values()).filter(d -> d.name().equals(name)).findFirst().orElse(null);
     }

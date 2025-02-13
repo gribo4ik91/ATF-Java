@@ -88,47 +88,12 @@ HttpStatus(int value, String reason) {
     this.reason = reason;
 }
 
-public Categories categories() {
-    return Categories.valueOf(this);
-}
-
-public boolean is1xxInformational() {
-    return (categories() == Categories.INFORMATIONAL);
-}
-
-public boolean is2xxSuccessful() {
-    return (categories() == Categories.SUCCESSFUL);
-}
-
-public boolean is3xxRedirection() {
-    return (categories() == Categories.REDIRECTION);
-}
-
-public boolean is4xxClientError() {
-    return (categories() == Categories.CLIENT_ERROR);
-}
-
-public boolean is5xxServerError() {
-    return (categories() == Categories.SERVER_ERROR);
-}
-
-public boolean isError() {
-    return (is4xxClientError() || is5xxServerError());
-}
 
 @Override
 public String toString() {
     return this.value + " " + name();
 }
 
-public static HttpStatus valueOf(int statusCode) {
-    for (HttpStatus status : values()) {
-        if (status.value == statusCode) {
-            return status;
-        }
-    }
-    throw new IllegalArgumentException();
-}
 
 public static HttpStatus valueOfString(String statusCode) {
     for (HttpStatus status : values()) {
@@ -139,32 +104,4 @@ public static HttpStatus valueOfString(String statusCode) {
     throw new IllegalArgumentException();
 }
 
-public enum Categories {
-
-    INFORMATIONAL(1),
-    SUCCESSFUL(2),
-    REDIRECTION(3),
-    CLIENT_ERROR(4),
-    SERVER_ERROR(5);
-
-    private final int value;
-
-    Categories(int value) {
-        this.value = value;
-    }
-
-    public static Categories valueOf(HttpStatus status) {
-        return valueOf(status.value);
-    }
-
-    public static Categories valueOf(int statusCode) {
-        statusCode = statusCode / 100;
-        for (Categories categories : values()) {
-            if (categories.value == statusCode) {
-                return categories;
-            }
-        }
-        throw new IllegalArgumentException();
-    }
-}
 }

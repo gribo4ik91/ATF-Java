@@ -44,7 +44,7 @@ public class Hook {
       log.info("The @PostConstruct method is executed");
 
         // Логика инициализации
-        var email = dataGenerator.createEmail(DataGenerator.EnvironmentPrefix.PORTAL);
+        var email = dataGenerator.createEmail();
         GlobalMap.getInstance().put(GENERATED_EMAIL, email);
         GlobalMap.getInstance().put(NADA_MAIL, email);
         GlobalMap.getInstance().put(USER_ID,  RandomStringUtils.randomNumeric(25));

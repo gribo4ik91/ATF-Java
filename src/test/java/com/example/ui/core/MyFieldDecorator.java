@@ -57,15 +57,6 @@ public class MyFieldDecorator extends DefaultFieldDecorator {
         return super.decorate(loader, field);
     }
 
-    @Override
-    protected WebElement proxyForLocator(final ClassLoader loader, final ElementLocator locator) {
-        java.lang.reflect.InvocationHandler handler = new ElementHandler(locator);
-
-        WebElement proxy;
-        proxy = (WebElement) Proxy.newProxyInstance(
-                loader, new Class[] {WebElement.class, WrapsElement.class, Locatable.class}, handler);
-        return proxy;
-    }
 
 
     private Object decorateContainer(final ClassLoader loader, final Field field) {

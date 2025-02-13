@@ -74,7 +74,7 @@ public class UiSteps {
     @Given("User is on the {string} page")
     public void userIsOnPage(String pageName) {
         var page = WaitUtils.waitUntilNotNull(() -> browser.findPageByName(pageName), defaultUiPageTimeout);
-        assertNotNull(pageName + " page not found or cannot be initiated", page);
+        assertNotNull(pageName + " page was founded successfully ", page);
         browser.verifyAndSetPage(page);
     }
 
@@ -87,20 +87,6 @@ public class UiSteps {
         field.click();
     }
 
-//    @Then("I check the following fields for {string} module")
-//    public void theFollowingFieldsAreMatched(String moduleName, DataTable dataTable) {
-//        var module = browser.findModule(moduleName);
-//        assertNotNull(moduleName, module);
-//        for (Map<String, String> data : dataTable.asMaps()) {
-//            var element = data.get("Fields");
-//            var value = data.get("Values");
-//            var elementName = module.getElementByName(element);
-//
-//            assertNotNull(element, elementName.getText());
-//            WaitUtils.waitUntilNotNull(() -> (elementName.getText().contains(value)), defaultUiTimeout);
-//            assertThat(elementName.getText(), containsString(value));
-//        }
-//    }
     @Then("^The table '(.*)' (matches|includes|not includes) the following records$")
     public void tableMatchesRecords(String elementName, String status, DataTable dataTable) {
         final var tableComponent = (Table) browser.findElementContainer(elementName);

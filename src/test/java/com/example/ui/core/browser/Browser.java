@@ -81,21 +81,6 @@ public class Browser implements IBrowser {
     private WebDriverWait waitPageToLoad() {
         var wait = new WebDriverWait(driver, Duration.ofSeconds(defaultUiTimeout));
         wait.until(d -> executeJavaScript("return document.readyState").equals("complete"));
-        wait.until(d -> {
-            try {
-                return ((Long) executeJavaScript("return jQuery.active") == 0);
-            } catch (Exception e) {
-                return true;
-            }
-        });
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(
-                By.xpath("//*[contains(translate(text(),'ABCDEFGHIJKLOMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'loading')]"))
-        );
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(
-                By.xpath("//*[contains(translate(text(),'ABCDEFGHIJKLOMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz'),'processing')]"))
-        );
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("spinner")));
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("loader")));
         return wait;
     }
 
@@ -111,11 +96,6 @@ public class Browser implements IBrowser {
         else {
             waitPageToLoad().until(condition);
         }
-    }
-
-    @Override
-    public void scrollToElement(WebElement element) {
-        executeJavaScript("arguments[0].scrollIntoView({block: 'center'});", element);
     }
 
 
@@ -152,11 +132,6 @@ public class Browser implements IBrowser {
         return ((JavascriptExecutor) this.driver).executeScript(script);
     }
 
-    @SuppressWarnings("RedundantCast")
-    @Override
-    public Object executeJavaScript(String script, WebElement... elements) {
-        return ((JavascriptExecutor) this.driver).executeScript(script, (Object[]) elements);
-    }
 
     @Override
     public void verifyAndSetPage(AbstractPage page) {
@@ -173,12 +148,13 @@ public class Browser implements IBrowser {
         var element = findElementByName(name);
         if (Objects.nonNull(element)) {
             return element;
-        } else {
-            element = findElementByText(name);
-            if (Objects.nonNull(element)) {
-                return element;
-            }
         }
+//        else {
+////            element = findElementByText(name);
+////            if (Objects.nonNull(element)) {
+////                return element;
+////            }
+//        }
         fail("An element " + name + " wasn't found");
         return null;
     }
@@ -201,27 +177,5 @@ public class Browser implements IBrowser {
         return null;
     }
 
-    public ElementContainer findElementByText(String text) {
-        var currentPage = getCurrentPage();
-        for (Field field : FieldUtils.getAllFieldsList(currentPage.getClass())) {
-            field.setAccessible(true);
-            if (ElementContainer.class.isAssignableFrom(field.getType())) {
-                try {
-                    var obj = (ElementContainer) field.get(currentPage);
-                    var element = obj.getByText(text);
-                    if (Objects.nonNull(element)) {
-                        return element;
-                    } else {
-                        continue;
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    continue;
-                }
-            }
-
-        }
-        return null;
-    }
 
 }

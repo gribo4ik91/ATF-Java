@@ -9,13 +9,9 @@ public interface IBrowser {
 
     void goToUrl(String url);
 
-//    WebElement findElement(String xpath);
-
     void waitCurrentPageToLoad();
 
     ElementContainer findElementContainer(String name);
-
-    void scrollToElement(WebElement element);
 
     AbstractPage findPageByName(String name);
 
@@ -25,11 +21,6 @@ public interface IBrowser {
 
     Object executeJavaScript(String script);
 
-//    Module findModuleByText(String text);
-//
-//    Module findModuleByName(String text);
-
-    Object executeJavaScript(String script, WebElement... elements);
 
     void verifyAndSetPage(AbstractPage page);
 }

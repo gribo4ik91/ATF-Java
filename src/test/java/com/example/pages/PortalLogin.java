@@ -15,7 +15,7 @@ import org.openqa.selenium.support.FindBy;
 import java.awt.*;
 
 @Getter
-@Page(name = "Portal Login Page", url = "")
+@Page(name = "Portal Login", url = "")
 public class PortalLogin extends AbstractPage {
 
     @FindBy(className = "login_logo")
