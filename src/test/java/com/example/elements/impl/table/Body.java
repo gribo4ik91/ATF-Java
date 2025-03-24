@@ -6,19 +6,18 @@ import com.example.ui.core.browser.Browser;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class Body extends ElementContainer {
 
-    private Supplier<Group<Row>> rowGroupComponent = () -> new Group<>(
+
+    private final Lazy<Group<Row>> rowGroupComponent = new Lazy<>(() -> new Group<>(
             getWrappedElement().findElements(By.xpath("//*[@id=\"myTable\"]/tr"))
                     .stream()
                     .map(el -> new Row(el, "", browser))
-                    .collect(Collectors.toList()));
+                    .collect(Collectors.toList())));
 
     public Body(final WebElement element, final String name, final Browser browser) {
         super(element, name, browser);
@@ -26,15 +25,13 @@ public class Body extends ElementContainer {
 
 
     /**
-     * Get rows
-     *
-     * @return list of rows
+     * Получает строки в виде списка `Map<String, Cell>` на основе переданных колонок.
      */
     public List<Map<String, Cell>> getRowsComponent(final List<String> columns) {
-        List<Map<String, Cell>> results = new ArrayList<>();
-        for (Row row : rowGroupComponent.get().getAll()) {
-            results.add(row.getRowComponentFrom(columns));
-        }
-        return results;
+        return rowGroupComponent.get().getAll().stream()
+                .map(row -> row.getRowComponentFrom(columns))
+                .collect(Collectors.toList());
     }
 }
+
+

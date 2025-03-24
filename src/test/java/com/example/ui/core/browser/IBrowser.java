@@ -23,4 +23,6 @@ public interface IBrowser {
 
 
     void verifyAndSetPage(AbstractPage page);
+
+    void setPage(AbstractPage page);
 }

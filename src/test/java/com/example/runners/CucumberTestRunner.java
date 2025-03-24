@@ -1,7 +1,6 @@
 package com.example.runners;
 
-//import com.example.config.CucumberSpringContextConfig;
-import com.example.config.WebDriverConfig;
+
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 
@@ -16,7 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
         plugin = {"pretty", "html:target/cucumber-reports.html", "json:target/cucumber.json"},
         monochrome = true
 )
-//@ContextConfiguration(classes = {CucumberSpringContextConfig.class})
+
 @ContextConfiguration()
 public class CucumberTestRunner {
 }

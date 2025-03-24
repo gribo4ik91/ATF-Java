@@ -2,7 +2,6 @@ package com.example.ui.core;
 
 import com.example.elements.IElement;
 import com.example.ui.core.browser.Browser;
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsElement;
 
@@ -55,18 +54,18 @@ public class ElementContainer implements WrapsElement, IElement {
         return isNotBlank(name) ? name : getClass().getSimpleName();
     }
 
-    public ElementContainer getByText(String text) {
-
-        var elText = getWrappedElement().getText();
-        if (text.equalsIgnoreCase(elText) || elText.contains(text)) {
-            return this;
-        }
-
-        return null;
-    }
-
-    public String getState() {
-        return StringUtils.EMPTY;
-    }
+//    public ElementContainer getByText(String text) {
+//
+//        var elText = getWrappedElement().getText();
+//        if (text.equalsIgnoreCase(elText) || elText.contains(text)) {
+//            return this;
+//        }
+//
+//        return null;
+//    }
+//
+//    public String getState() {
+//        return StringUtils.EMPTY;
+//    }
 
 }

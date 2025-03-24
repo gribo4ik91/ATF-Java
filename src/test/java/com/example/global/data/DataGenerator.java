@@ -1,13 +1,9 @@
 package com.example.global.data;
 
-import com.example.global.GlobalMap;
 import net.datafaker.Faker;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.beans.factory.annotation.Value;
 import org.apache.commons.lang3.RandomUtils;
-//import com.github.javafaker.Faker;
-//import com.github.javafaker.Faker;
+
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,8 +11,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import static com.example.global.GlobalMapKey.EMAIL_DOMAIN;
-import static com.example.global.GlobalMapKey.EMAIL_PREFIX;
 
 public class DataGenerator {
 
@@ -57,21 +51,6 @@ public class DataGenerator {
         return address;
     }
 
-
-//    public enum EnvironmentPrefix {
-//        PORTAL("portal"),
-//        REST("api");
-//
-//        private String env;
-//
-//        EnvironmentPrefix(String env) {
-//            this.env = env;
-//        }
-//
-//        public String toString() {
-//            return env;
-//        }
-//    }
 
 
 }

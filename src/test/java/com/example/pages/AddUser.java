@@ -8,7 +8,6 @@ import com.example.ui.core.browser.Browser;
 import lombok.Getter;
 import org.openqa.selenium.support.FindBy;
 
-import java.awt.*;
 
 @Getter
 @Page(name = "Add User", url = "/addUser")

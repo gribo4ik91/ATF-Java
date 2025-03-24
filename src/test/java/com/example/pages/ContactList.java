@@ -1,7 +1,6 @@
 package com.example.pages;
 
 import com.example.elements.impl.Button;
-import com.example.elements.impl.InputText;
 import com.example.elements.impl.table.Table;
 import com.example.ui.core.AbstractPage;
 import com.example.ui.core.Page;
@@ -28,16 +27,8 @@ public class ContactList extends AbstractPage {
     @FindBy(className = "contactTableBodyRow")
     private Button contactDetailsButton;
 
-//    @FindBy(id = "myTable")
     @FindBy(className = "contactTable")
     private Table contactTable;
-
-
-//    @FindBy(id = "submit")
-//    private com.example.elements.impl.Button submitButton;
-//
-//    @FindBy(id = "signup")
-//    private Button sign_up_Button;
 
     public ContactList(Browser browser) {
         super(browser);

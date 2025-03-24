@@ -1,24 +1,16 @@
 package com.example.hook;
 
+
 import com.example.global.GlobalMap;
 import com.example.global.data.DataGenerator;
-import com.example.ui.utils.datateble.paramreplacers.PlaceholderReplacer;
-import io.cucumber.datatable.DataTable;
-import io.cucumber.java.BeforeAll;
-import io.cucumber.java.DataTableType;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
-//import javax.annotation.PostConstruct;
 
-import java.util.stream.Collectors;
 
 import static com.example.global.GlobalMapKey.*;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -61,11 +53,6 @@ public class Hook {
         GlobalMap.getInstance().put(GENERATED_POSTCODE, dataGenerator.createRandomAddress().get("Postcode"));
         GlobalMap.getInstance().put(GENERATED_COUNTRY, dataGenerator.createRandomAddress().get("County"));
     }
-
-
-
-
-
 
 
 }

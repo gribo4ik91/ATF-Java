@@ -18,6 +18,7 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ManageDataTable {
 
@@ -27,11 +28,11 @@ public class ManageDataTable {
     private static final DataTableTypeRegistry registry = new DataTableTypeRegistry(Locale.ENGLISH);
     private static final DataTable.TableConverter tableConverter = new DataTableTypeRegistryTableConverter(registry);
 
-//
+
     public String replaceData(final String data) {
         return StringUtils.isNotEmpty(data) ? placeholderReplacer.replaceAll(data) : StringUtils.EMPTY;
     }
-//
+
     public DataTable overrideData(final DataTable dataTable) {
         List<List<String>> results = new ArrayList<>();
         for (List<String> row : dataTable.cells()) {
@@ -42,50 +43,37 @@ public class ManageDataTable {
     }
 
 
-    public void matchesRecordsInTable(Table table, DataTable dataTable) {
-        List<List<String>> results = new ArrayList<>();
-
-        // Add columns
-        List<String> columns = dataTable.row(0);
-        results.add(dataTable.row(0));
-
-        // Add all rows
-        results.addAll(table.getRowsDataByColumns(columns));
-
-        // Diffs expected table with actual table
-        DataTable actualDataTable = DataTable.create(results);
-        dataTable.unorderedDiff(actualDataTable);
-    }
-
     public void includesRecordsInTable(Table table, DataTable dataTable) {
         List<List<String>> results = new ArrayList<>();
 
-        // Add columns
+        // Добавить столбцы
         List<String> columns = dataTable.row(0);
         results.add(columns);
 
-        // Add filtered rows
+        // Добавить отфильтрованные строки
         results.addAll(table.filterRowsData(dataTable));
 
-        // Verify that the row(s) include in the table
+        // Проверяем, что строка(и) включены в таблицу
         if (dataTable.asLists().size() > results.size()) {
-            // Add columns
+            // Добавить столбцы
             List<List<String>> newResults = new ArrayList<>();
             newResults.add(columns);
 
-            // Add all rows
+            // Добавить все строки
             newResults.addAll(table.getRowsDataByColumns(columns));
-
+            // Сравнивает ожидаемую таблицу с фактической таблицей
             DataTable actualDataTable = DataTable.create(newResults);
             dataTable.unorderedDiff(actualDataTable);
         }
     }
 
+
+
     public void notIncludesRecordsInTable(Table table, DataTable dataTable) {
-        // Get filter rows
+        // Получить отфильтрованные строки
         List<List<String>> filteredRows = table.filterRowsData(dataTable);
 
-        // Verify that the row(s) not include in the table
+        // Проверить, что строка(и) не включены в таблицу
         ATFAssert.assertThat(String.format("The rows should not be displayed in the table.\n%s", DataTable.create(filteredRows)), filteredRows.size(), is(0));
     }
 

@@ -2,6 +2,7 @@ package com.example.pages;
 
 import com.example.elements.impl.Button;
 import com.example.elements.impl.InputText;
+import com.example.elements.impl.Span;
 import com.example.ui.core.AbstractPage;
 import com.example.ui.core.Page;
 import com.example.ui.core.browser.Browser;
@@ -53,6 +54,9 @@ public class AddContact extends AbstractPage {
 
     @FindBy(id = "logout")
     private Button logoutButton;
+
+    @FindBy(id = "error")
+    private Span errorMessage;
 
     public AddContact(Browser browser) {
         super(browser);

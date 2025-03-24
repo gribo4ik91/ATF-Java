@@ -8,9 +8,7 @@ import com.example.ui.core.Page;
 import com.example.ui.core.browser.Browser;
 
 import lombok.Getter;
-
 import org.openqa.selenium.support.FindBy;
-
 
 import java.awt.*;
 
@@ -21,15 +19,9 @@ public class PortalLogin extends AbstractPage {
     @FindBy(className = "login_logo")
     private Label loginLogo;
 
-//    @FindBy(xpath = "/html/body/div[3]/span")
     @FindBy(id = "error")
     private Span errorMessage;
 
-
-
-//    @FindByName(name = "Incorrect username or password")
-//    @FindBy(id = "error")
-//    private Span errorMessage;
 
     @FindBy(id = "email")
     private InputText username;

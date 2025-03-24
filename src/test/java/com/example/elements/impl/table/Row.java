@@ -11,17 +11,17 @@ import org.openqa.selenium.WebElement;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Row extends ElementContainer implements IButton {
 
 
-    private Supplier<Group<Cell>> cellGroupComponent = () -> new Group<>(
+    private final Lazy<Group<Cell>> cellGroupComponent = new Lazy<>(() -> new Group<>(
             getWrappedElement().findElements(By.tagName("td"))
             .stream()
             .filter(el -> !"true".equals(el.getAttribute("hidden")))
-            .map(el -> new Cell(el, "", browser)).collect(Collectors.toList()));
+            .map(el -> new Cell(el, "", browser)).collect(Collectors.toList())));
 
     public Row(final WebElement element, final String name, final Browser browser) {
         super(element, name, browser);
@@ -34,34 +34,19 @@ public class Row extends ElementContainer implements IButton {
 
 
     /**
-     * Get row component from cells
-     *
-     * @param columns
-     *
-     * @return
+     * Создаёт `Map<String, Cell>`, связывая ячейки с колонками (по имени и индексу).
      */
     public Map<String, Cell> getRowComponentFrom(final List<String> columns) {
-        Map<String, Cell> columnHashMap = new LinkedHashMap<>();
-        Map<String, Cell> indexHashMap = new LinkedHashMap<>();
-        Map<String, Cell> results = new LinkedHashMap<>();
+        List<Cell> cells = cellGroupComponent.get().getAll();
+        Map<String, Cell> rowMap = new LinkedHashMap<>();
 
-        int columnIndex = 0;
-        final List<Cell> cells = cellGroupComponent.get().getAll();
-        final int size = cells.size() - 1;
+        IntStream.range(0, Math.min(columns.size(), cells.size()))
+                .forEach(i -> {
+                    String columnName = columns.get(i).toLowerCase();
+                    rowMap.put(columnName, cells.get(i)); // По имени колонки
+                    rowMap.put(String.valueOf(i + 1), cells.get(i)); // По индексу (1-based)
+                });
 
-        for (String column : columns) {
-            if (columnIndex > size) {
-                break;
-            }
-
-            Cell cell = cells.get(columnIndex++);
-            if (!column.isEmpty()) {
-                columnHashMap.put(column.toLowerCase(), cell);
-            }
-            indexHashMap.put(String.valueOf(columnIndex), cell);
-        }
-        results.putAll(columnHashMap);
-        results.putAll(indexHashMap);
-        return results;
+        return rowMap;
     }
 }

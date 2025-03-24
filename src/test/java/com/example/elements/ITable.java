@@ -2,8 +2,6 @@ package com.example.elements;
 
 import java.util.List;
 
-import com.example.elements.impl.table.Cell;
-import com.example.elements.impl.table.Row;
 import io.cucumber.datatable.DataTable;
 
 public interface ITable {

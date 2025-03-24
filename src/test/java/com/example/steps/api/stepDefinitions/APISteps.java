@@ -162,10 +162,9 @@ public class APISteps {
 
 
     @Then("I should see my contact in the list")
-    public void iShouldSeeMyContactInTheList() throws IOException {
+    public void iShouldSeeMyContactInTheList() {
         List<Contact> contacts = (List<Contact>) response.body();
-//        assert contacts != null && !contacts.isEmpty();
-//        var request = GlobalMap.getInstance().get(GENERATED_REQUEST);
+
         var userEmail = GlobalMap.getInstance().get(GENERATED_EMAIL);
         Contact myContactFromResponse = new Contact();
         for (int i = 0; i < contacts.size(); i++) {
@@ -203,13 +202,11 @@ public class APISteps {
 
     private void compareContactResponse(final Contact myContactFromResponse) {
         var request = GlobalMap.getInstance().get(GENERATED_REQUEST);
-        //  User authenticatedUser = GlobalMap.getInstance().getAs(HTTP_RESPONSE_BODY, User.class);
         auth.compareContact((Contact) request, myContactFromResponse);
     }
 
     private void compareUserResponse(final User myContactFromResponse) {
         var request = GlobalMap.getInstance().get(GENERATED_REQUEST);
-        //  User authenticatedUser = GlobalMap.getInstance().getAs(HTTP_RESPONSE_BODY, User.class);
         auth.compareUsers((User) request, myContactFromResponse);
     }
 

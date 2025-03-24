@@ -22,7 +22,6 @@
     <selenium.version>4.14.0</selenium.version>
 <!--    <junit.version>5.11.0</junit.version>-->
     <cucumber.version>7.16.1</cucumber.version>
-<!--    <allure.version>2.29.0</allure.version>-->
     <webdrivermanager.version>5.5.3</webdrivermanager.version>
   </properties>
 
@@ -109,7 +108,6 @@
       <groupId>org.hamcrest</groupId>
       <artifactId>hamcrest</artifactId>
       <version>2.2</version>
-
     </dependency>
 
     <dependency>
@@ -119,23 +117,6 @@
       <scope>test</scope>
     </dependency>
 
-<!--    <dependency>-->
-<!--      <groupId>io.qameta.allure</groupId>-->
-<!--      <artifactId>allure-junit5</artifactId>-->
-<!--      <version>${allure.version}</version>-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--      <groupId>io.qameta.allure</groupId>-->
-<!--      <artifactId>allure-java-commons</artifactId>-->
-<!--      <version>${allure.version}</version> &lt;!&ndash; Актуальная версия Allure &ndash;&gt;-->
-<!--&lt;!&ndash;      <scope>test</scope>&ndash;&gt;-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--      <groupId>io.qameta.allure</groupId>-->
-<!--      <artifactId>allure-cucumber6-jvm</artifactId>-->
-<!--      <version>${allure.version}</version> &lt;!&ndash; Актуальная версия Allure для Cucumber &ndash;&gt;-->
-<!--&lt;!&ndash;      <scope>test</scope>&ndash;&gt;-->
-<!--    </dependency>-->
       <dependency>
           <groupId>org.apache.commons</groupId>
           <artifactId>commons-lang3</artifactId>
@@ -170,15 +151,10 @@
       <version>7.7.0</version>
       <scope>test</scope>
     </dependency>
-
-
   </dependencies>
 
   <build>
     <plugins>
-
-
-
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
@@ -201,20 +177,6 @@
           </execution>
         </executions>
       </plugin>
-<!--      <plugin>-->
-<!--        <groupId>io.qameta.allure</groupId>-->
-<!--        <artifactId>allure-maven</artifactId>-->
-<!--        <version>2.10.0</version>-->
-<!--        <executions>-->
-<!--          <execution>-->
-<!--            <id>allure-report</id>-->
-<!--            <phase>verify</phase>-->
-<!--            <goals>-->
-<!--              <goal>report</goal>-->
-<!--            </goals>-->
-<!--          </execution>-->
-<!--        </executions>-->
-<!--      </plugin>-->
     </plugins>
   </build>
 </project>

@@ -38,14 +38,14 @@ Feature:  API Tests
   Scenario: Login and logout with a new user successfully
     When User is logged in as the new user
     Then the response status code should be '200'
-    And I can logout successfully with the new user
+    And New user can log out
     Then the response status code should be '200'
 
 
   Scenario: Login and delete  new user successfully
     When User is logged in as the new user
     Then the response status code should be '200'
-    And I can delete a new user
+    And Delete a new user
     Then the response status code should be '200'
 
 

@@ -10,17 +10,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
+
 
 public class Cell  extends ElementContainer implements IButton {
 
-    private Supplier<Group<Cell>> subCellGroupComponent = () -> new Group<>(
+    private final Lazy<Group<Cell>> subCellGroupComponent = new Lazy<>(() -> new Group<>(
             getWrappedElement().findElements(By.xpath("./td[not(@hidden='true')]"))
                     .stream()
-                    .map(el -> new Cell(el, "", browser)).collect(Collectors.toList()));
+                    .map(el -> new Cell(el, "", browser)).collect(Collectors.toList())));
 
     public Cell(final WebElement element, final String name, final Browser browser) {
         super(element, name, browser);
@@ -33,16 +32,14 @@ public class Cell  extends ElementContainer implements IButton {
 
     @Override
     public String getText() {
-        String text = new GetTextAction(this, browser).execute();
-        text = text.replaceAll("\\r|\\n|\\r\\n", " ").strip();
-        return text;
+        return new GetTextAction(this, browser).execute().replace("\n", " ").strip();
     }
 
     public List<String> getSubCellTexts() {
         return subCellGroupComponent.get().getAll()
                 .stream()
-                .map(el -> el.getWrappedElement().getText())
-                .collect(toList());
+                .map(Cell::getText) // Используем метод `getText()`, чтобы получать чистый текст
+                .collect(Collectors.toList());
     }
 
 

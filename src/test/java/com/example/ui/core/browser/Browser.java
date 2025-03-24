@@ -1,27 +1,18 @@
 package com.example.ui.core.browser;
 
-import com.example.elements.impl.Group;
-//import com.example.elements.impl.GroupModule;
-//import com.example.elements.impl.Module;
 import com.example.ui.core.AbstractPage;
 import com.example.ui.core.ElementContainer;
-import com.example.ui.core.FindByName;
 import com.example.ui.core.Page;
 import com.example.ui.utils.WaitUtils;
-import com.google.common.base.Function;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-//import org.springframework.beans.factory.config.BeanDefinition;
-//import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -36,13 +27,7 @@ import static com.example.ATFAssert.assertNotNull;
 import static com.example.ATFAssert.fail;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
-//import static org.junit.Assert.assertNotNull;
-//import static org.springframework.test.util.AssertionErrors.assertNotNull;
-//import static org.springframework.test.util.AssertionErrors.assertNotNull;
 
-
-//@Component("customBrowser")
-//@Service("customBrowser")
 @Slf4j
 public class Browser implements IBrowser {
 
@@ -140,6 +125,17 @@ public class Browser implements IBrowser {
         waitUntilBrowserUrlContains(classAnnotation.url());
         assertThat("Page url doesn't match", getCurrentUrl(), containsString(classAnnotation.url()));
         setCurrentPage(page);
+        log.info("[Info] Page url set to {}", getCurrentUrl());
+    }
+
+    @Override
+    public void setPage(AbstractPage page) {
+        var classAnnotation = AnnotationUtils.getAnnotation(page.getClass(), Page.class);
+     //   assertNotNull("Page annotation", classAnnotation);
+        waitUntilBrowserUrlContains(classAnnotation.url());
+       // assertThat("Page url doesn't match", getCurrentUrl(), containsString(classAnnotation.url()));
+        setCurrentPage(page);
+        log.info("[Info] Page url set to {}", getCurrentUrl());
     }
 
 
@@ -147,24 +143,21 @@ public class Browser implements IBrowser {
     public ElementContainer findElementContainer(String name) {
         var element = findElementByName(name);
         if (Objects.nonNull(element)) {
+            log.info("[Info] The element was found successfully with name {}", name);
             return element;
         }
-//        else {
-////            element = findElementByText(name);
-////            if (Objects.nonNull(element)) {
-////                return element;
-////            }
-//        }
         fail("An element " + name + " wasn't found");
         return null;
     }
 
     public ElementContainer findElementByName(String name) {
         for (Field field : FieldUtils.getAllFieldsList(currentPage.getClass())) {
-            field.setAccessible(true);
+            field.setAccessible(true); // Разрешаем доступ к приватному полю
             if (ElementContainer.class.isAssignableFrom(field.getType())) {
-                var annotationName = field.getDeclaredAnnotation(FindByName.class);
-                if ((annotationName != null && annotationName.name().equalsIgnoreCase(name)) || field.getName().equalsIgnoreCase(name.replaceAll("\\s", ""))) {
+//                var annotationName = field.getDeclaredAnnotation(FindByName.class);
+                if (
+//                        (annotationName != null && annotationName.name().equalsIgnoreCase(name)) ||
+                                field.getName().equalsIgnoreCase(name.replaceAll("\\s", ""))){
                     try {
                         return (ElementContainer) field.get(currentPage);
                     } catch (IllegalAccessException e) {

@@ -2,7 +2,6 @@ package com.example.pages;
 
 
 import com.example.elements.impl.Button;
-import com.example.elements.impl.InputText;
 import com.example.elements.impl.Label;
 import com.example.ui.core.AbstractPage;
 import com.example.ui.core.Page;

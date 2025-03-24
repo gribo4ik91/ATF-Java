@@ -2,13 +2,10 @@ package com.example.ui.utils.datateble.paramreplacers;
 
 import com.example.global.GlobalMap;
 import com.example.global.GlobalMapKey;
-import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -43,19 +40,7 @@ public class PlaceholderReplacer {
             if (data instanceof String) {
                 result = result.replaceAll(initialPattern, (String) data);
             }
-            // Если данные - Map, пытаемся заменить значение в зависимости от следующего ключа
-            else if (data instanceof Map) {
-                if (i + 1 < found.size()) {
-                    String nextKey = found.get(i + 1);
-                    Map<?, ?> map = (Map<?, ?>) data;
-                    Object value = map.get(nextKey);
-                    if (value instanceof String) {
-                        String nestedPattern = String.format("\\[%s\\]\\[%s\\]", keyName, nextKey);
-                        result = result.replaceFirst(Pattern.quote(nestedPattern), (String) value);
-                        i++;  // Пропускаем следующий элемент, так как он уже обработан
-                    }
-                }
-            }
+
         }
 
         return result;
