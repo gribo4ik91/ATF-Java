@@ -6,11 +6,10 @@ import com.example.api.models.User;
 import static com.example.ATFAssert.assertThat;
 import static org.hamcrest.text.IsEqualIgnoringCase.equalToIgnoringCase;
 
-//@SuppressWarnings("SpringJavaAutowiredMembersInspection")
+
 public class Comparator {
 
-//    @Autowired
-//    private RetrofitServices retrofit;
+
 
     public void compareUsers(User user, User userObjectResponse) {
 

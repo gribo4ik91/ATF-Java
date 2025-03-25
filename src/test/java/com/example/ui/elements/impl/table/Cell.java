@@ -1,9 +1,9 @@
-package com.example.elements.impl.table;
+package com.example.ui.elements.impl.table;
 
-import com.example.action.ClickAction;
-import com.example.action.GetTextAction;
-import com.example.elements.IButton;
-import com.example.elements.impl.Group;
+import com.example.ui.action.ClickAction;
+import com.example.ui.action.GetTextAction;
+//import com.example.ui.elements.IButton;
+import com.example.ui.elements.impl.Group;
 import com.example.ui.core.ElementContainer;
 import com.example.ui.core.browser.Browser;
 import org.openqa.selenium.By;
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 
 
-public class Cell  extends ElementContainer implements IButton {
+public class Cell  extends ElementContainer  {
 
     private final Lazy<Group<Cell>> subCellGroupComponent = new Lazy<>(() -> new Group<>(
             getWrappedElement().findElements(By.xpath("./td[not(@hidden='true')]"))
@@ -25,7 +25,7 @@ public class Cell  extends ElementContainer implements IButton {
         super(element, name, browser);
     }
 
-    @Override
+//    @Override
     public void click() {
         new ClickAction(this, browser).execute();
     }

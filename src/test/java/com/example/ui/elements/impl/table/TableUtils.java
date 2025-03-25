@@ -1,9 +1,9 @@
-package com.example.elements.impl.table;
+package com.example.ui.elements.impl.table;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import com.example.elements.impl.Group;
+import com.example.ui.elements.impl.Group;
 import io.cucumber.datatable.DataTable;
 
 

@@ -1,6 +1,12 @@
 package com.example.api.models;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class LoginResponse {
+    // Getters and Setters
     private String token;
     private User user;
 
@@ -12,20 +18,4 @@ public class LoginResponse {
         this.user = user;
     }
 
-    // Getters and Setters
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

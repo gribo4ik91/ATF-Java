@@ -1,19 +1,16 @@
-package com.example.elements.impl;
+package com.example.ui.elements.impl;
 
-import com.example.action.*;
-import com.example.elements.IInputText;
-
+import com.example.ui.action.ClearAndTypeAction;
 import com.example.ui.core.ElementContainer;
 import org.openqa.selenium.WebElement;
 import com.example.ui.core.browser.Browser;
 
-public class InputText extends ElementContainer implements IInputText {
+public class InputText extends ElementContainer  {
 
     public InputText(WebElement element, String name, Browser browser) {
         super(element, name, browser);
     }
 
-    @Override
     public void clearAndType(String text) {
         new ClearAndTypeAction(this, browser, text).execute();
     }

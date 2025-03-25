@@ -1,10 +1,9 @@
-package com.example.elements.impl;
+package com.example.ui.elements.impl;
 
 
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
-
 import com.example.ui.core.ElementContainer;
 
 import lombok.NoArgsConstructor;

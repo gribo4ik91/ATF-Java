@@ -1,8 +1,8 @@
-package com.example.pages;
+package com.example.ui.pages;
 
 
-import com.example.elements.impl.Button;
-import com.example.elements.impl.Label;
+import com.example.ui.elements.impl.Button;
+import com.example.ui.elements.impl.Label;
 import com.example.ui.core.AbstractPage;
 import com.example.ui.core.Page;
 import com.example.ui.core.browser.Browser;

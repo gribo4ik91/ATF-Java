@@ -1,6 +1,6 @@
-package com.example.elements.impl.table;
+package com.example.ui.elements.impl.table;
 
-import com.example.elements.impl.Group;
+import com.example.ui.elements.impl.Group;
 import com.example.ui.core.ElementContainer;
 import com.example.ui.core.browser.Browser;
 import org.openqa.selenium.By;

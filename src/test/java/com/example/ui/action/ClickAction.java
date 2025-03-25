@@ -1,4 +1,4 @@
-package com.example.action;
+package com.example.ui.action;
 
 
 import com.example.ui.core.AbstractAction;

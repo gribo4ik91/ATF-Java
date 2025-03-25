@@ -1,7 +1,7 @@
 package com.example.ui.utils.datateble;
 
 import com.example.ATFAssert;
-import com.example.elements.impl.table.Table;
+import com.example.ui.elements.impl.table.Table;
 import com.example.ui.utils.datateble.paramreplacers.PlaceholderReplacer;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.datatable.DataTableTypeRegistry;
@@ -12,13 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.hamcrest.CoreMatchers.is;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
-import static org.hamcrest.MatcherAssert.assertThat;
+
 
 public class ManageDataTable {
 

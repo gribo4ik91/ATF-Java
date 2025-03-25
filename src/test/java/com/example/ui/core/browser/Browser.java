@@ -31,7 +31,7 @@ import static org.hamcrest.Matchers.containsString;
 @Slf4j
 public class Browser implements IBrowser {
 
-    private static final String PAGES_PATH = "com.example.pages";
+    private static final String PAGES_PATH = "com.example.ui.pages";
 
     @Getter
     @Value("30")

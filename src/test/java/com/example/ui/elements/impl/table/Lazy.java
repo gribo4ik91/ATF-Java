@@ -1,4 +1,4 @@
-package com.example.elements.impl.table;
+package com.example.ui.elements.impl.table;
 
 import java.util.function.Supplier;
 

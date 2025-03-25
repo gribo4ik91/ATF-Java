@@ -8,7 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/test/resources/features",
-        tags = "@e2e",
+        tags = "@UI",
         glue = "com.example.steps",
         stepNotifications = true,
         plugin = {"pretty", "html:target/cucumber-reports.html", "json:target/cucumber.json"},

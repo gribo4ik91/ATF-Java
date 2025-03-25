@@ -1,4 +1,4 @@
-package com.example.elements.impl;
+package com.example.ui.elements.impl;
 
 
 import com.example.ui.core.ElementContainer;

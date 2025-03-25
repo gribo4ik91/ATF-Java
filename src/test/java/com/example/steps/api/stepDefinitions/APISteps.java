@@ -64,6 +64,7 @@ public class APISteps {
 
     @When("User adds a (contact|user) with the following details:$")
     @When("I add a (contact|user) with the following details:$")
+    @When("Add a new (contact|user) with the following details:$")
     public void addContact(String type, DataTable dataTable) throws IOException {
         Contact contact = new Contact();
         User user = new User();

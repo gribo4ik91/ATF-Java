@@ -1,7 +1,7 @@
-package com.example.elements.impl.table;
+package com.example.ui.elements.impl.table;
 
-import com.example.elements.ITable;
-import com.example.elements.impl.Group;
+//import com.example.ui.elements.ITable;
+import com.example.ui.elements.impl.Group;
 import com.example.ui.core.ElementContainer;
 import com.example.ui.core.browser.Browser;
 
@@ -11,7 +11,7 @@ import io.cucumber.datatable.DataTable;
 import java.util.*;
 import static java.util.stream.Collectors.toList;
 
-public class Table extends ElementContainer implements ITable {
+public class Table extends ElementContainer {
 
     private final Lazy<Group<Body>> bodyGroupComponent = new Lazy<>(() -> new Group<>(
             getWrappedElement().findElements(By.xpath("//*[@id=\"myTable\"]")) // XPath для строк
@@ -29,7 +29,7 @@ public class Table extends ElementContainer implements ITable {
         super(element, name, browser);
     }
 
-    @Override
+//    @Override
     public List<List<String>> getRowsDataByColumns(final List<String> columns) {
         return TableUtils.getRowsData(columnGroupComponent.get(), bodyGroupComponent.get(), columns);
     }

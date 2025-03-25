@@ -1,8 +1,8 @@
-package com.example.elements.impl.table;
+package com.example.ui.elements.impl.table;
 
-import com.example.action.ClickAction;
-import com.example.elements.IButton;
-import com.example.elements.impl.Group;
+import com.example.ui.action.ClickAction;
+//import com.example.ui.elements.IButton;
+import com.example.ui.elements.impl.Group;
 import com.example.ui.core.ElementContainer;
 import com.example.ui.core.browser.Browser;
 import org.openqa.selenium.By;
@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class Row extends ElementContainer implements IButton {
+public class Row extends ElementContainer  {
 
 
     private final Lazy<Group<Cell>> cellGroupComponent = new Lazy<>(() -> new Group<>(
@@ -27,7 +27,7 @@ public class Row extends ElementContainer implements IButton {
         super(element, name, browser);
     }
 
-    @Override
+//    @Override
     public void click() {
         new ClickAction(this, browser).execute();
     }

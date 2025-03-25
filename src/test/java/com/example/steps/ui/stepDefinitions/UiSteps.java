@@ -1,9 +1,10 @@
 package com.example.steps.ui.stepDefinitions;
 
-import com.example.elements.IButton;
-import com.example.elements.impl.table.Table;
+//import com.example.ui.elements.IButton;
+import com.example.ui.elements.impl.Button;
+import com.example.ui.elements.impl.table.Table;
 
-import com.example.pages.PortalLogin;
+import com.example.ui.pages.PortalLogin;
 
 import com.example.ui.core.browser.Browser;
 import com.example.ui.utils.datateble.ManageDataTable;
@@ -79,7 +80,7 @@ public class UiSteps {
     @When("I click on {string}")
     @When("User clicks on {string}")
     public void clickOnElement(String elementName) {
-        var field = WaitUtils.waitUntilNotNull(() -> (IButton) browser.findElementContainer(elementName), defaultUiTimeout);
+        var field = WaitUtils.waitUntilNotNull(() -> (Button) browser.findElementContainer(elementName), defaultUiTimeout);
         assertNotNull(elementName, field);
         field.click();
     }
@@ -87,23 +88,22 @@ public class UiSteps {
 
     @When("User clicks on {string} and is redirected to the {string} page")
     public void clickOnElementAndRederect (String elementName, String pageName) {
-        var field = WaitUtils.waitUntilNotNull(() -> (IButton) browser.findElementContainer(elementName), defaultUiTimeout);
+        var field = WaitUtils.waitUntilNotNull(() -> (Button) browser.findElementContainer(elementName), defaultUiTimeout);
         assertNotNull(elementName, field);
         field.click();
+
 
         var page = WaitUtils.waitUntilNotNull(() -> browser.findPageByName(pageName), defaultUiPageTimeout);
         assertNotNull(pageName + " page was founded successfully ", page);
         browser.setPage(page);
     }
 
-    @Then("^The table '(.*)' (matches|includes|not includes) the following records$")
+    @Then("^The table '(.*)' (includes|not includes) the following records$")
     public void tableMatchesRecords(String elementName, String status, DataTable dataTable) {
         final var tableComponent = (Table) browser.findElementContainer(elementName);
 
         switch (status) {
-//            case "matches":
-//                manageDataTable.matchesRecordsInTable(tableComponent, dataTable);
-//                break;
+
             case "includes":
                 manageDataTable.includesRecordsInTable(tableComponent, dataTable);
                 break;

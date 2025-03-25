@@ -1,6 +1,6 @@
-package com.example.elements.impl;
+package com.example.ui.elements.impl;
 
-import com.example.action.GetTextAction;
+import com.example.ui.action.GetTextAction;
 import com.example.ui.core.ElementContainer;
 import com.example.ui.core.browser.Browser;
 import org.openqa.selenium.WebElement;
