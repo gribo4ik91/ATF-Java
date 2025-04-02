@@ -36,10 +36,6 @@ Feature: UI tests
     Then User is on the 'Contact List' page
 
 
-
-
-
-
   Scenario: Check that the contact table is empty for newly created user
     Given User navigates to the login page
     When User completes the following fields on the page
@@ -50,11 +46,6 @@ Feature: UI tests
     Then The table 'contactTable ' not includes the following records
       | Birthdate  | Email                          | Phone       | Country      |
       | 2000-05-20 | portal101224190514@clrmail.com | 34809789312 | Bedfordshire |
-
-
-
-
-
 
 
 
@@ -108,60 +99,57 @@ Feature: UI tests
       | stateOrProvince | [GENERATED_STATE]          |
       | postalCode      | [GENERATED_POSTCODE]       |
       | country         | [GENERATED_COUNTRY]        |
-#
-#
-#
-##  @e2e
-##  Scenario: Log in with the newly created user and add a new contact
-##    Given User navigates to the login page
-###    Then User is on the 'Portal Login' page
-##    When User completes the following fields on the page
-##      | Fields    | Values            |
-##      | Username  | [GENERATED_EMAIL] |
-##      | Password  | [PASSWORD]        |
-##    And User clicks on 'submit Button'
-###    Then User is on the 'Contact List' page
-##    And The table 'contactTable ' not includes the following records
-##      | Name | Birthdate | Email | Phone | Address | City, State/Province, Postal Code | Country |
-##      |      |           |       |       |         |                                   |         |
-##    When User clicks on 'add New Contact Button'
-##    Then User is on the 'Add Contact' page
-##    When User completes the following fields on the page
-##      | Fields          | Values                     |
-##      | firstName       | [FIRST_NAME]               |
-##      | lastName        | [LAST_NAME]                |
-##      | birthdate       | 2000-05-20                 |
-##      | email           | [GENERATED_EMAIL]          |
-##      | phone           | [PHONE_NUMBER]             |
-##      | street1         | [GENERATED_STREET]        |
-##      | street2         | [GENERATED_BUILDINGNUMBER] |
-##      | city            | [GENERATED_CITY]           |
-##      | stateOrProvince | [GENERATED_STATE]           |
-##      | postalCode      | [GENERATED_POSTCODE]       |
-##      | country         | [GENERATED_COUNTRY]        |
-##      | submit Button   |                            |
-##    Then User is on the 'Contact List' page
-##    And The table 'contactTable' includes the following records
-##      | Birthdate  | Email             | Phone          | Country             |
-##      | 2000-05-20 | [GENERATED_EMAIL] | [PHONE_NUMBER] | [GENERATED_COUNTRY] |
-##    When User clicks on 'contact Details Button'
-##    Then User is on the 'Contact Details' page
-##    And The following fields should be displayed with values
-##      | Fields          | Values                     |
-##      | firstName       | [FIRST_NAME]               |
-##      | lastName        | [LAST_NAME]                |
-##      | birthdate       | 2000-05-20                 |
-##      | email           | [GENERATED_EMAIL]          |
-##      | phone           | [PHONE_NUMBER]             |
-##      | street1         | [GENERATED_STREET]         |
-##      | street2         | [GENERATED_BUILDINGNUMBER] |
-##      | city            | [GENERATED_CITY]           |
-##      | stateOrProvince | [GENERATED_STATE]          |
-##      | postalCode      | [GENERATED_POSTCODE]       |
-##      | country         | [GENERATED_COUNTRY]        |
-#
 
 
+
+  @e2e @ignore
+  Scenario: Log in with the newly created user and add a new contact
+    Given User navigates to the login page
+#    Then User is on the 'Portal Login' page
+    When User completes the following fields on the page
+      | Fields    | Values            |
+      | Username  | [GENERATED_EMAIL] |
+      | Password  | [PASSWORD]        |
+    And User clicks on 'submit Button'
+#    Then User is on the 'Contact List' page
+    And The table 'contactTable ' not includes the following records
+      | Name | Birthdate | Email | Phone | Address | City, State/Province, Postal Code | Country |
+      |      |           |       |       |         |                                   |         |
+    When User clicks on 'add New Contact Button'
+    Then User is on the 'Add Contact' page
+    When User completes the following fields on the page
+      | Fields          | Values                     |
+      | firstName       | [FIRST_NAME]               |
+      | lastName        | [LAST_NAME]                |
+      | birthdate       | 2000-05-20                 |
+      | email           | [GENERATED_EMAIL]          |
+      | phone           | [PHONE_NUMBER]             |
+      | street1         | [GENERATED_STREET]        |
+      | street2         | [GENERATED_BUILDINGNUMBER] |
+      | city            | [GENERATED_CITY]           |
+      | stateOrProvince | [GENERATED_STATE]           |
+      | postalCode      | [GENERATED_POSTCODE]       |
+      | country         | [GENERATED_COUNTRY]        |
+      | submit Button   |                            |
+    Then User is on the 'Contact List' page
+    And The table 'contactTable' includes the following records
+      | Birthdate  | Email             | Phone          | Country             |
+      | 2000-05-20 | [GENERATED_EMAIL] | [PHONE_NUMBER] | [GENERATED_COUNTRY] |
+    When User clicks on 'contact Details Button'
+    Then User is on the 'Contact Details' page
+    And The following fields should be displayed with values
+      | Fields          | Values                     |
+      | firstName       | [FIRST_NAME]               |
+      | lastName        | [LAST_NAME]                |
+      | birthdate       | 2000-05-20                 |
+      | email           | [GENERATED_EMAIL]          |
+      | phone           | [PHONE_NUMBER]             |
+      | street1         | [GENERATED_STREET]         |
+      | street2         | [GENERATED_BUILDINGNUMBER] |
+      | city            | [GENERATED_CITY]           |
+      | stateOrProvince | [GENERATED_STATE]          |
+      | postalCode      | [GENERATED_POSTCODE]       |
+      | country         | [GENERATED_COUNTRY]        |
 
 
 
@@ -212,7 +200,7 @@ Feature: UI tests
       | userstestownerclrmail#com |
       | userstestownerclrmail.com |
 
-@e2e
+
   Scenario Outline: Verify that adding a contact without mandatory fields <Id> results in an error message
     Given User navigates to the login page
     And User completes the following fields on the page
