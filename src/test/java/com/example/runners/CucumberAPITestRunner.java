@@ -1,20 +1,21 @@
 package com.example.runners;
 
-import io.cucumber.junit.Cucumber;
-import io.cucumber.junit.CucumberOptions;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
+import org.junit.platform.suite.api.ConfigurationParameter;
+import org.junit.platform.suite.api.IncludeEngines;
+import org.junit.platform.suite.api.SelectClasspathResource;
+import org.junit.platform.suite.api.Suite;
 
-@RunWith(Cucumber.class)
-@CucumberOptions(
-        features = "src/test/resources/features",
-        tags = "@API",
-        glue = "com.example.steps",
-        stepNotifications = true,
-        plugin = {"pretty", "html:target/cucumber-reports.html", "json:target/cucumber.json"},
-        monochrome = true
-)
+import static io.cucumber.junit.platform.engine.Constants.*;
 
-@ContextConfiguration()
+
+@Suite
+@IncludeEngines("cucumber")
+@SelectClasspathResource("features")
+@ConfigurationParameter(key = "cucumber.glue", value = "com.example.steps")
+@ConfigurationParameter(key = "cucumber.filter.tags", value = "@API")
+@ConfigurationParameter(key = "cucumber.plugin", value =
+        "pretty, summary, html:target/cucumber-reports.html, json:target/cucumber.json, io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm")
+@ConfigurationParameter(key = "cucumber.execution.monochrome", value = "true")
+@ConfigurationParameter(key = "cucumber.execution.step-notifications", value = "true")
 public class CucumberAPITestRunner {
 }
