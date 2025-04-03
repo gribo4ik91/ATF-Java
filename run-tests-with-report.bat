@@ -1,4 +1,5 @@
 @echo off
+chcp 65001
 set "JAVA_HOME=C:\Program Files\RedHat\java-17-openjdk-17.0.11.0.9-1"
 set "PATH=%JAVA_HOME%\bin;%PATH%"
 echo JAVA_HOME и PATH установлены на время сессии.
