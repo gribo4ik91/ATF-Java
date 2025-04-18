@@ -9,72 +9,98 @@ import io.cucumber.datatable.DataTableTypeRegistryTableConverter;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.hamcrest.CoreMatchers.is;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import static java.util.stream.Collectors.toList;
+import static org.hamcrest.CoreMatchers.is;
 
-
+/**
+ * Утилитный класс для работы с Cucumber DataTable и UI-таблицами;
+ * Позволяет заменять плейсхолдеры, сравнивать строки, проверять наличие/отсутствие записей.
+ *
+ * <p>Класс `ManageDataTable` используется в степах Cucumber для проверки данных таблиц на UI:
+ * - Заменяет [PLACEHOLDER] на значения из GlobalMap;
+ * - Преобразует DataTable с заменой данных;
+ * - Проверяет, включены или исключены записи в таблице на UI.</p>
+ */
 public class ManageDataTable {
 
     @Autowired
-    PlaceholderReplacer placeholderReplacer;
+    private PlaceholderReplacer placeholderReplacer;
 
     private static final DataTableTypeRegistry registry = new DataTableTypeRegistry(Locale.ENGLISH);
     private static final DataTable.TableConverter tableConverter = new DataTableTypeRegistryTableConverter(registry);
 
-
+    /**
+     * Заменяет плейсхолдеры в строке с использованием {@link PlaceholderReplacer}.
+     *
+     * @param data строка, возможно содержащая плейсхолдер (например, [EMAIL])
+     * @return строка с подставленным значением или пустая строка
+     */
     public String replaceData(final String data) {
         return StringUtils.isNotEmpty(data) ? placeholderReplacer.replaceAll(data) : StringUtils.EMPTY;
     }
 
+    /**
+     * Применяет `replaceData()` ко всем ячейкам в таблице и возвращает новую таблицу.
+     *
+     * @param dataTable исходная DataTable из .feature-файла
+     * @return новая DataTable с заменёнными значениями
+     */
     public DataTable overrideData(final DataTable dataTable) {
         List<List<String>> results = new ArrayList<>();
         for (List<String> row : dataTable.cells()) {
-            List<String> newRow = row.stream().map(this::replaceData).collect(toList());
+            List<String> newRow = row.stream()
+                    .map(this::replaceData)
+                    .collect(toList());
             results.add(newRow);
         }
         return DataTable.create(results, tableConverter);
     }
 
-
+    /**
+     * Проверяет, что данные из DataTable присутствуют в UI-таблице.
+     *
+     * @param table     объект таблицы (UI)
+     * @param dataTable ожидаемые строки
+     */
     public void includesRecordsInTable(Table table, DataTable dataTable) {
         List<List<String>> results = new ArrayList<>();
 
-        // Добавить столбцы
+        // Заголовки
         List<String> columns = dataTable.row(0);
         results.add(columns);
 
-        // Добавить отфильтрованные строки
+        // Отфильтрованные строки по критериям
         results.addAll(table.filterRowsData(dataTable));
 
-        // Проверяем, что строка(и) включены в таблицу
+        // Если количество строк недостаточно — сравниваем всё
         if (dataTable.asLists().size() > results.size()) {
-            // Добавить столбцы
             List<List<String>> newResults = new ArrayList<>();
             newResults.add(columns);
-
-            // Добавить все строки
             newResults.addAll(table.getRowsDataByColumns(columns));
-            // Сравнивает ожидаемую таблицу с фактической таблицей
+
+            // Проверка с unorderedDiff
             DataTable actualDataTable = DataTable.create(newResults);
             dataTable.unorderedDiff(actualDataTable);
         }
     }
 
-
-
+    /**
+     * Проверяет, что строки из DataTable отсутствуют в таблице UI.
+     *
+     * @param table     объект таблицы
+     * @param dataTable ожидаемые строки, которых не должно быть
+     */
     public void notIncludesRecordsInTable(Table table, DataTable dataTable) {
-        // Получить отфильтрованные строки
         List<List<String>> filteredRows = table.filterRowsData(dataTable);
 
-        // Проверить, что строка(и) не включены в таблицу
-        ATFAssert.assertThat(String.format("The rows should not be displayed in the table.\n%s", DataTable.create(filteredRows)), filteredRows.size(), is(0));
+        ATFAssert.assertThat(
+                String.format("The rows should not be displayed in the table.\n%s", DataTable.create(filteredRows)),
+                filteredRows.size(),
+                is(0)
+        );
     }
-
-
 }
-

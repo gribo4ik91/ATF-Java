@@ -11,8 +11,9 @@ public enum GlobalMapKey {
     EMAIL_PREFIX(""),
     EMAIL_DOMAIN(""),
     NADA_MAIL(""),
-    GENERATED_EMAIL(""),
-
+    GENERATED_EMAIL_API(""),
+    GENERATED_EMAIL_UI(""),
+    FOLDR_ID(""),
     PHONE_NUMBER(""),
     PASSWORD(""),
     FIRST_NAME(""),

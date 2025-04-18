@@ -1,27 +1,28 @@
 @UI
 Feature: UI tests
 
+  @UI4
   Scenario: Create a new user
     Given User navigates to the login page
     Then User is on the 'Portal Login' page
     When User clicks on 'Sign Up Button'
     Then User is on the 'Add User' page
     And User completes the following fields on the page
-      | Fields        | Values            |
-      | Email         | [GENERATED_EMAIL] |
-      | Password      | [PASSWORD]        |
-      | firstName     | [FIRST_NAME]      |
-      | lastName      | [LAST_NAME]       |
-      | submit Button |                   |
+      | Fields        | Values               |
+      | Email         | [GENERATED_EMAIL_UI] |
+      | Password      | [PASSWORD]           |
+      | firstName     | [FIRST_NAME]         |
+      | lastName      | [LAST_NAME]          |
+      | submit Button |                      |
     Then User is on the 'Contact List' page
 
 
   Scenario: Log in with the existing user
     Given User navigates to the login page
     And User completes the following fields on the page
-      | Fields    | Values            |
-      | Username  | api041224145058@clrmail.com |
-      | Password  | Test1234        |
+      | Fields   | Values                      |
+      | Username | api041224145058@clrmail.com |
+      | Password | Test1234                    |
     When User clicks on 'submit Button'
     Then User is on the 'Contact List' page
 
@@ -29,9 +30,9 @@ Feature: UI tests
   Scenario: Log in with the newly created user
     Given User navigates to the login page
     When User completes the following fields on the page
-      | Fields    | Values            |
-      | Username  | [GENERATED_EMAIL] |
-      | Password  | [PASSWORD]        |
+      | Fields   | Values               |
+      | Username | [GENERATED_EMAIL_UI] |
+      | Password | [PASSWORD]           |
     And User clicks on 'submit Button'
     Then User is on the 'Contact List' page
 
@@ -39,22 +40,21 @@ Feature: UI tests
   Scenario: Check that the contact table is empty for newly created user
     Given User navigates to the login page
     When User completes the following fields on the page
-      | Fields    | Values            |
-      | Username  | test200325155510@clrmail.com |
-      | Password  | [PASSWORD]        |
+      | Fields   | Values                       |
+      | Username | test200325155510@clrmail.com |
+      | Password | [PASSWORD]                   |
     Then User clicks on 'submit Button' and is redirected to the 'Contact List' page
     Then The table 'contactTable ' not includes the following records
       | Birthdate  | Email                          | Phone       | Country      |
       | 2000-05-20 | portal101224190514@clrmail.com | 34809789312 | Bedfordshire |
 
 
-
   Scenario: Check possibility to add a new contact for newly created user
     Given User navigates to the login page
     When User completes the following fields on the page
-      | Fields    | Values            |
-      | Username  | [GENERATED_EMAIL] |
-      | Password  | [PASSWORD]        |
+      | Fields   | Values               |
+      | Username | [GENERATED_EMAIL_UI] |
+      | Password | [PASSWORD]           |
     Then User clicks on 'submit Button' and is redirected to the 'Contact List' page
     Then User clicks on 'add New Contact Button' and is redirected to the 'Add Contact' page
     When User completes the following fields on the page
@@ -62,27 +62,27 @@ Feature: UI tests
       | firstName       | [FIRST_NAME]               |
       | lastName        | [LAST_NAME]                |
       | birthdate       | 2000-05-20                 |
-      | email           | [GENERATED_EMAIL]          |
+      | email           | [GENERATED_EMAIL_UI]       |
       | phone           | [PHONE_NUMBER]             |
-      | street1         | [GENERATED_STREET]        |
+      | street1         | [GENERATED_STREET]         |
       | street2         | [GENERATED_BUILDINGNUMBER] |
       | city            | [GENERATED_CITY]           |
-      | stateOrProvince | [GENERATED_STATE]           |
+      | stateOrProvince | [GENERATED_STATE]          |
       | postalCode      | [GENERATED_POSTCODE]       |
       | country         | [GENERATED_COUNTRY]        |
       | submit Button   |                            |
     Then User is on the 'Contact List' page
     And The table 'contactTable' includes the following records
-      | Birthdate  | Email             | Phone          | Country             |
-      | 2000-05-20 | [GENERATED_EMAIL] | [PHONE_NUMBER] | [GENERATED_COUNTRY] |
+      | Birthdate  | Email                | Phone          | Country             |
+      | 2000-05-20 | [GENERATED_EMAIL_UI] | [PHONE_NUMBER] | [GENERATED_COUNTRY] |
 
-
+  @UI4
   Scenario: Log in with the newly created user and add check Contact Details page
     Given User navigates to the login page
     When User completes the following fields on the page
-      | Fields    | Values            |
-      | Username  | [GENERATED_EMAIL] |
-      | Password  | [PASSWORD]        |
+      | Fields   | Values               |
+      | Username | [GENERATED_EMAIL_UI] |
+      | Password | [PASSWORD]           |
     Then User clicks on 'submit Button' and is redirected to the 'Contact List' page
     When User clicks on 'contact Details Button'
     Then User is on the 'Contact Details' page
@@ -91,7 +91,7 @@ Feature: UI tests
       | firstName       | [FIRST_NAME]               |
       | lastName        | [LAST_NAME]                |
       | birthdate       | 2000-05-20                 |
-      | email           | [GENERATED_EMAIL]          |
+      | email           | [GENERATED_EMAIL_UI]       |
       | phone           | [PHONE_NUMBER]             |
       | street1         | [GENERATED_STREET]         |
       | street2         | [GENERATED_BUILDINGNUMBER] |
@@ -101,15 +101,14 @@ Feature: UI tests
       | country         | [GENERATED_COUNTRY]        |
 
 
-
   @e2e @ignore
   Scenario: Log in with the newly created user and add a new contact
     Given User navigates to the login page
 #    Then User is on the 'Portal Login' page
     When User completes the following fields on the page
-      | Fields    | Values            |
-      | Username  | [GENERATED_EMAIL] |
-      | Password  | [PASSWORD]        |
+      | Fields   | Values               |
+      | Username | [GENERATED_EMAIL_UI] |
+      | Password | [PASSWORD]           |
     And User clicks on 'submit Button'
 #    Then User is on the 'Contact List' page
     And The table 'contactTable ' not includes the following records
@@ -122,27 +121,7 @@ Feature: UI tests
       | firstName       | [FIRST_NAME]               |
       | lastName        | [LAST_NAME]                |
       | birthdate       | 2000-05-20                 |
-      | email           | [GENERATED_EMAIL]          |
-      | phone           | [PHONE_NUMBER]             |
-      | street1         | [GENERATED_STREET]        |
-      | street2         | [GENERATED_BUILDINGNUMBER] |
-      | city            | [GENERATED_CITY]           |
-      | stateOrProvince | [GENERATED_STATE]           |
-      | postalCode      | [GENERATED_POSTCODE]       |
-      | country         | [GENERATED_COUNTRY]        |
-      | submit Button   |                            |
-    Then User is on the 'Contact List' page
-    And The table 'contactTable' includes the following records
-      | Birthdate  | Email             | Phone          | Country             |
-      | 2000-05-20 | [GENERATED_EMAIL] | [PHONE_NUMBER] | [GENERATED_COUNTRY] |
-    When User clicks on 'contact Details Button'
-    Then User is on the 'Contact Details' page
-    And The following fields should be displayed with values
-      | Fields          | Values                     |
-      | firstName       | [FIRST_NAME]               |
-      | lastName        | [LAST_NAME]                |
-      | birthdate       | 2000-05-20                 |
-      | email           | [GENERATED_EMAIL]          |
+      | email           | [GENERATED_EMAIL_UI]       |
       | phone           | [PHONE_NUMBER]             |
       | street1         | [GENERATED_STREET]         |
       | street2         | [GENERATED_BUILDINGNUMBER] |
@@ -150,7 +129,26 @@ Feature: UI tests
       | stateOrProvince | [GENERATED_STATE]          |
       | postalCode      | [GENERATED_POSTCODE]       |
       | country         | [GENERATED_COUNTRY]        |
-
+      | submit Button   |                            |
+    Then User is on the 'Contact List' page
+    And The table 'contactTable' includes the following records
+      | Birthdate  | Email                | Phone          | Country             |
+      | 2000-05-20 | [GENERATED_EMAIL_UI] | [PHONE_NUMBER] | [GENERATED_COUNTRY] |
+    When User clicks on 'contact Details Button'
+    Then User is on the 'Contact Details' page
+    And The following fields should be displayed with values
+      | Fields          | Values                     |
+      | firstName       | [FIRST_NAME]               |
+      | lastName        | [LAST_NAME]                |
+      | birthdate       | 2000-05-20                 |
+      | email           | [GENERATED_EMAIL_UI]       |
+      | phone           | [PHONE_NUMBER]             |
+      | street1         | [GENERATED_STREET]         |
+      | street2         | [GENERATED_BUILDINGNUMBER] |
+      | city            | [GENERATED_CITY]           |
+      | stateOrProvince | [GENERATED_STATE]          |
+      | postalCode      | [GENERATED_POSTCODE]       |
+      | country         | [GENERATED_COUNTRY]        |
 
 
   Scenario: Check that the contact table is displayed with the following information for existing user
@@ -200,9 +198,10 @@ Feature: UI tests
       | userstestownerclrmail#com |
       | userstestownerclrmail.com |
 
-
+  @UI3
   Scenario Outline: Verify that adding a contact without mandatory fields <Id> results in an error message
     Given User navigates to the login page
+#    Then make debug screenshot
     And User completes the following fields on the page
       | Fields   | Values                      |
       | Username | 20250213153133a@clrmail.com |
@@ -214,7 +213,7 @@ Feature: UI tests
       | firstName       | <Invalid first name>       |
       | lastName        | <Invalid last name>        |
       | birthdate       | 2000-05-20                 |
-      | email           | [GENERATED_EMAIL]          |
+      | email           | [GENERATED_EMAIL_UI]       |
       | phone           | [PHONE_NUMBER]             |
       | street1         | [GENERATED_STREET]         |
       | street2         | [GENERATED_BUILDINGNUMBER] |

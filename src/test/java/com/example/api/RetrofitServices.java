@@ -2,17 +2,17 @@ package com.example.api;
 
 import com.example.api.models.LoginResponse;
 import com.example.global.GlobalMap;
-import okhttp3.Credentials;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.env.Environment;
-import retrofit2.Response;
 
 import java.util.Map;
 
 import static com.example.global.GlobalMapKey.HTTP_RESPONSE_BODY;
-import static javax.swing.text.DefaultStyledDocument.ElementSpec.ContentType;
 
+
+@SpringBootTest
 public class RetrofitServices extends RetrofitFactory {
 
     @Autowired

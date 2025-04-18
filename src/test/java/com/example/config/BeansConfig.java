@@ -12,22 +12,21 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.openqa.selenium.WebDriver;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.context.annotation.*;
 
 @ComponentScan(excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = Browser.class))
 @Configuration
 @Lazy
 @PropertySource(ignoreResourceNotFound = true, value = {
-        "classpath:env/application.properties",
-        "classpath:properties/atf.properties",
-        "classpath:roles/user.roles.properties"
+        "classpath:env/application.properties"
 })
 public class BeansConfig {
 
 
     @Bean
-    public Browser browser() {
-        return new Browser();
+    public Browser browser(ObjectProvider<WebDriver> webDriverProvider) {
+        return new Browser(webDriverProvider);
     }
 
     @Bean
@@ -47,18 +46,9 @@ public class BeansConfig {
     }
 
 
-//    private boolean isApiTest() {
-//        // Логика для проверки, что это API тест
-//        return System.getProperty("test.type", "UI").equalsIgnoreCase("API");
-////        return System.getgetProperty("test.type", "ui").equals("api");
-//    }
 
     @Bean
-    @Scope("singleton")
     public WebDriver driver(WebDriverConfig webDriverConfig) {
-//        if (isApiTest()) {
-//            return null;
-//        }
             return webDriverConfig.driver();
     }
 

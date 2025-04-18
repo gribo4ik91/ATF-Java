@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <timestamp key="startTime" datePattern="yyyy-MM-dd_HH-mm-ss"/>
+
+    <!-- Appender для консоли -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Appender в память для Allure шагов -->
+    <appender name="STEP_LOGGER" class="com.example.hook.listeners.StepLoggerAppender"/>
+
+    <!-- Активируем root: пишем и в консоль, и в память -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="STEP_LOGGER"/>
+    </root>
+</configuration>

@@ -7,19 +7,43 @@ Feature:  API Tests
       | id            | [USER_ID]                  |
       | firstName     | [FIRST_NAME]               |
       | lastName      | [LAST_NAME]                |
-      | birthdate     | 1970-01-01                 |
-      | email         | [GENERATED_EMAIL]          |
+      | birthdate     | 2000-05-20                 |
+      | email         | [GENERATED_EMAIL_API]          |
       | phone         | [PHONE_NUMBER]             |
       | street1       | [GENERATED_STREET]         |
       | street2       | [GENERATED_BUILDINGNUMBER] |
       | city          | [GENERATED_CITY]           |
       | stateProvince | [GENERATED_STATE]          |
-      | postalCode    | [GENERATED_POSTCODE]     |
+      | postalCode    | [GENERATED_POSTCODE]       |
       | country       | [GENERATED_COUNTRY]        |
     Then the response status code should be '201'
+
+
+
+  Scenario: A new contact present in the list of contacts
+  When New contact is created with the following details:
+    | Fields        | Values                     |
+    | id            | [USER_ID]                  |
+    | firstName     | [FIRST_NAME]               |
+    | lastName      | [LAST_NAME]                |
+    | birthdate     | 2000-05-20                 |
+    | email         | [GENERATED_EMAIL_API]          |
+    | phone         | [PHONE_NUMBER]             |
+    | street1       | [GENERATED_STREET]         |
+    | street2       | [GENERATED_BUILDINGNUMBER] |
+    | city          | [GENERATED_CITY]           |
+    | stateProvince | [GENERATED_STATE]          |
+    | postalCode    | [GENERATED_POSTCODE]       |
+    | country       | [GENERATED_COUNTRY]        |
     And the contact should appear in the contact list
     Then the response status code should be '200'
     Then I should see my contact in the list
+
+
+
+
+
+
 
 
 #User
@@ -28,24 +52,32 @@ Feature:  API Tests
       | Fields        | Values                     |
       | firstName     | [FIRST_NAME]               |
       | lastName      | [LAST_NAME]                |
-      | email         | [GENERATED_EMAIL]          |
+      | email         | [GENERATED_EMAIL_API]          |
       | Password      | [PASSWORD]        |
     Then the response status code should be '201'
-#    And A new user can log in
-#    Then the response status code should be '200'
+
 
 
   Scenario: Login and logout with a new user successfully
     When User is logged in as the new user
-#    Then the response status code should be '200'
     And New user can log out
     Then the response status code should be '200'
 
-
+  @UI6
   Scenario: Login and delete  new user successfully
-    When User is logged in as the new user
-#    Then the response status code should be '200'
-    And Delete a new user
+    When New user is created with the following details:
+      | Fields    | Values               |
+      | firstName | [FIRST_NAME]         |
+      | lastName  | [LAST_NAME]          |
+      | email     | [GENERATED_EMAIL_UI] |
+      | Password  | [PASSWORD]           |
+    And The user can be deleted
     Then the response status code should be '200'
+
+
+
+
+
+
 
 

@@ -1,6 +1,6 @@
 package com.example.steps.ui.stepDefinitions;
 
-//import com.example.ui.elements.IButton;
+import com.example.ui.core.browser.base.H2ConsoleTest;
 import com.example.ui.elements.impl.Button;
 import com.example.ui.elements.impl.table.Table;
 
@@ -16,33 +16,27 @@ import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
 
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import io.cucumber.datatable.DataTable;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import org.springframework.core.env.Environment;
 
 import static com.example.ATFAssert.*;
 import static java.lang.String.format;
 import static org.hamcrest.CoreMatchers.is;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import java.util.Map;
 
 
-//@SuppressWarnings("SpringJavaAutowiredMembersInspection")
 @CucumberContextConfiguration
 @SpringBootTest
 @Slf4j
-public class UiSteps {
+public class UiSteps extends H2ConsoleTest{
 
-    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-    LocalDateTime now = LocalDateTime.now();
 
     @DataTableType(replaceWithEmptyString = {"-empty-", "-blank-"})
     public DataTable defaultDatatable(DataTable dataTable) {
@@ -63,9 +57,6 @@ public class UiSteps {
 
     @Autowired
     private Environment env;
-
-    @Value("${file.output.path}")
-    private String filePath;
 
 
     @Given("I am on the {string} page")
@@ -152,22 +143,13 @@ public class UiSteps {
 
     @When("User completes the following fields on the page")
     public void completeElementsOnPage(DataTable dataTable) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
-            for (Map<String, String> row : dataTable.asMaps()) {
-                var field = row.get("Fields");
-                var value = row.get("Values");
 
+        for (Map<String, String> row : dataTable.asMaps()) {
+            var field = row.get("Fields");
+            var value = row.get("Values");
+            var component = browser.findElementContainer(field);
+            component.doAction(value);
 
-                writer.write(" Tested on: " + dtf.format(now));
-                writer.write(" Action performed on field: " + field + " with value: " + value);
-                writer.newLine();
-
-                var component = browser.findElementContainer(field);
-                component.doAction(value);
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 

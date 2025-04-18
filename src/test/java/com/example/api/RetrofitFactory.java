@@ -50,17 +50,11 @@ public class RetrofitFactory {
 
             if (Objects.isNull(client)) {
                 var logInterceptor = new HttpLoggingInterceptor(message -> {
-                    if (log.isDebugEnabled()) {
-                        log.debug(message);
-                    } else {
                         log.info(message);
-                    }
                 });
-                if (log.isDebugEnabled()) {
-                    logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-                } else {
+
                     logInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
-                }
+
 
                 client = new OkHttpClient.Builder()
                         .addInterceptor(chain -> chain.proceed(
