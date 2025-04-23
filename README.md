@@ -10,7 +10,7 @@ ATF is a custom automated testing framework built with Java using:
 - Spring (DI and context configuration)
 - Allure (reporting)
 
-The framework supports both API and UI testing with centralized configuration in `application.properties` and `atf.properties`.
+The framework supports both API and UI testing with centralized configuration in `application.properties`.
 
 ---
 
