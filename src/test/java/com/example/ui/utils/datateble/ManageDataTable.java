@@ -100,7 +100,8 @@ public class ManageDataTable {
         ATFAssert.assertThat(
                 String.format("The rows should not be displayed in the table.\n%s", DataTable.create(filteredRows)),
                 filteredRows.size(),
-                is(0)
+                is(0),
+                false
         );
     }
 }

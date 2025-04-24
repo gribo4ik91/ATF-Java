@@ -1,41 +1,36 @@
 package com.example.steps.ui.stepDefinitions;
 
-import com.example.ui.core.browser.base.H2ConsoleTest;
+import com.example.config.DriverManager;
+import com.example.ui.core.browser.Browser;
 import com.example.ui.elements.impl.Button;
 import com.example.ui.elements.impl.table.Table;
-
 import com.example.ui.pages.PortalLogin;
-
-import com.example.ui.core.browser.Browser;
-import com.example.ui.utils.datateble.ManageDataTable;
 import com.example.ui.utils.WaitUtils;
+import com.example.ui.utils.datateble.ManageDataTable;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.DataTableType;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
-
 import lombok.extern.slf4j.Slf4j;
-
+import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import io.cucumber.datatable.DataTable;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import org.springframework.core.env.Environment;
+
+import java.util.Map;
 
 import static com.example.ATFAssert.*;
 import static java.lang.String.format;
 import static org.hamcrest.CoreMatchers.is;
 
 
-import java.util.Map;
-
-
 @CucumberContextConfiguration
 @SpringBootTest
 @Slf4j
-public class UiSteps extends H2ConsoleTest{
+public class UiSteps {
 
 
     @DataTableType(replaceWithEmptyString = {"-empty-", "-blank-"})
@@ -78,7 +73,7 @@ public class UiSteps extends H2ConsoleTest{
 
 
     @When("User clicks on {string} and is redirected to the {string} page")
-    public void clickOnElementAndRederect (String elementName, String pageName) {
+    public void clickOnElementAndRederect(String elementName, String pageName) {
         var field = WaitUtils.waitUntilNotNull(() -> (Button) browser.findElementContainer(elementName), defaultUiTimeout);
         assertNotNull(elementName, field);
         field.click();
@@ -122,7 +117,7 @@ public class UiSteps extends H2ConsoleTest{
         value = manageDataTable.replaceData(value);
         var element = browser.findElementContainer(component);
         assertThat((format("The %s value does not match with %s", component, value)),
-                WaitUtils.waitUntilNotNull(() -> element.getText().replaceAll("\n", ""), defaultUiTimeout), is(value));
+                WaitUtils.waitUntilNotNull(() -> element.getText().replaceAll("\n", ""), defaultUiTimeout), is(value), false);
     }
 
     @Then("{} is displayed with value: {string}")
@@ -130,14 +125,13 @@ public class UiSteps extends H2ConsoleTest{
     public void waitUntilIsDisplayedWithValue(String component, String value) {
         var element = browser.findElementContainer(component);
         WaitUtils.waitUntilCondition(() -> {
-                    try {
-                        return element.getWrappedElement().isDisplayed();
-                    } catch (Exception e) {
-                        return false;
-                    }
-                },
-                true, defaultUiTimeout);
-        assertThat(element.getWrappedElement().getText(), is(value));
+            try {
+                return element.getWrappedElement().isDisplayed();
+            } catch (Exception e) {
+                return false;
+            }
+        }, true, defaultUiTimeout);
+        assertThat(element.getWrappedElement().getText(), is(value),false);
     }
 
 

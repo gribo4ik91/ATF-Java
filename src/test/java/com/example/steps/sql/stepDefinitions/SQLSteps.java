@@ -51,7 +51,7 @@ public class SQLSteps {
 
     @Then("User should get {int} users")
     public void verifyCount(int expected) {
-        assertThat(results.size(), is(expected));
+        assertThat(results.size(), is(expected),false);
     }
 
 
