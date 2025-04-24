@@ -13,11 +13,9 @@ public class GlobalMap {
     private final Map<GlobalMapKey, Object> data = new HashMap<>();
 
     public static GlobalMap getInstance() {
-        synchronized (GlobalMap.class) {
             if (instance == null) {
                 instance = new GlobalMap();
             }
-        }
         return instance;
     }
 
