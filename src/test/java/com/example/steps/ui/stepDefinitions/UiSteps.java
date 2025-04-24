@@ -1,6 +1,5 @@
 package com.example.steps.ui.stepDefinitions;
 
-import com.example.config.DriverManager;
 import com.example.ui.core.browser.Browser;
 import com.example.ui.elements.impl.Button;
 import com.example.ui.elements.impl.table.Table;
@@ -14,7 +13,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.spring.CucumberContextConfiguration;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -131,7 +129,7 @@ public class UiSteps {
                 return false;
             }
         }, true, defaultUiTimeout);
-        assertThat(element.getWrappedElement().getText(), is(value),false);
+        assertThat(element.getWrappedElement().getText(), is(value), false);
     }
 
 

@@ -25,8 +25,10 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Nullable;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.time.Duration;
 import java.util.Objects;
+import java.util.Set;
 
 import static com.example.ATFAssert.assertNotNull;
 import static com.example.ATFAssert.fail;
@@ -81,7 +83,7 @@ public class Browser implements IBrowser {
         if (driver != null) {
             driver.quit();
             DriverManager.removeDriver();
-            log.info("🧹 WebDriver остановлен и удалён из DriverManager");
+            log.info("WebDriver остановлен и удалён из DriverManager");
         }
     }
 
@@ -90,7 +92,7 @@ public class Browser implements IBrowser {
      */
     public WebDriver getDriver() {
         if (this.driver == null || ((RemoteWebDriver) this.driver).getSessionId() == null) {
-            log.warn("🔁 WebDriver is null or closed — reinitializing");
+            log.warn("WebDriver is null or closed — reinitializing");
             driver = webDriverProvider.getObject();
             DriverManager.setDriver(this.driver);
         }

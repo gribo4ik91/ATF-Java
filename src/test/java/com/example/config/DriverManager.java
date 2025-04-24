@@ -27,7 +27,7 @@ public class DriverManager {
      *
      * @return WebDriver или null, если сессия завершена или отсутствует
      */
-    public static WebDriver getDriverLis() {
+    public static WebDriver getDriver() {
         WebDriver driver = driverThreadLocal.get();
 
         // Проверяем, является ли WebDriver удалённым и неактивным (нет sessionId)

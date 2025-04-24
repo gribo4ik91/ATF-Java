@@ -1,38 +1,34 @@
 package com.example.steps.api.stepDefinitions;
 
 import com.example.HttpStatus;
-
 import com.example.api.Comparator;
 import com.example.api.RetrofitServices;
 import com.example.api.models.Contact;
 import com.example.api.models.HttpError;
 import com.example.api.models.User;
-//import com.example.config.CucumberSpringContextConfig;
 import com.example.global.GlobalMap;
-//import com.example.sql.Queries;
-import com.example.sql.DbUtils;
-import com.example.ui.utils.datateble.ManageDataTable;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.cucumber.datatable.DataTable;
-import io.cucumber.java.DataTableType;
-import io.cucumber.java.en.*;
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import retrofit2.Response;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.time.LocalDate;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static com.example.ATFAssert.*;
+import static com.example.ATFAssert.assertNotNull;
+import static com.example.ATFAssert.fail;
 import static com.example.ATFHTTPAssert.assertStatus;
 import static com.example.global.GlobalMapKey.*;
 import static java.util.Objects.requireNonNull;
-import static org.hamcrest.CoreMatchers.is;
 
 
 @Slf4j
@@ -40,21 +36,6 @@ public class APISteps {
 
 
     private Response<?> response;
-
-
-    @Autowired
-    private DbUtils dBUtils;
-
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
-
-//    private Queries queries;
-
-    private List<Map<String, Object>> results;
-    private Map<String, String> selectorInDB;
-    private Map<String, String> contactInfo;
-    private User userInserted;
-
 
     @Autowired
     private RetrofitServices retrofit;
@@ -85,7 +66,7 @@ public class APISteps {
         return null;
     }
 
-    // Обрабатываем несколько вариантов шагов, чтобы покрыть разные формулировки сценариев
+
     @When("New (contact|user) is created with the following details:$")
     @When("User adds a (contact|user) with the following details:$")
     @When("I add a (contact|user) with the following details:$")
@@ -164,15 +145,9 @@ public class APISteps {
     // Преобразование строки в нужный тип Java
     private Object convertType(Class<?> type, String value) {
         if (type == String.class) return value;
-//        if (type == int.class || type == Integer.class) return Integer.parseInt(value);
-//        if (type == long.class || type == Long.class) return Long.parseLong(value);
-//        if (type == boolean.class || type == Boolean.class) return Boolean.parseBoolean(value);
-//        if (type == LocalDate.class) return LocalDate.parse(value); // пример для даты
         // Добавь другие типы, если нужно
         return value; // если тип неизвестен — оставляем как строку
     }
-
-
 
 
     @When("User is logged in as the new user")
@@ -239,13 +214,9 @@ public class APISteps {
         }
 
         compareContactResponse(myContactFromResponse);
-        // assertThat("User 'email' field does not match", test3.get, equalToIgnoringCase(user.getEmail()));
-
 
 
     }
-
-
 
 
     public static String getValueIgnoreCase(Map<String, String> map, String key) {
@@ -261,7 +232,7 @@ public class APISteps {
     public void checkStatusResponseCode(HttpStatus responseCode) {
         int actualResponseStatus = (int) GlobalMap.getInstance().get(HTTP_RESPONSE_CODE);
 
-        assertStatus(actualResponseStatus, requireNonNull(responseCode));
+        assertStatus(actualResponseStatus, requireNonNull(responseCode), false);
     }
 
 

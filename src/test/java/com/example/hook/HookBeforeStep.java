@@ -7,7 +7,11 @@ import ch.qos.logback.core.FileAppender;
 import com.example.global.GlobalMap;
 import com.example.ui.core.browser.Browser;
 import io.cucumber.java.*;
+import io.cucumber.plugin.event.PickleStepTestStep;
+import io.cucumber.plugin.event.Status;
+import io.cucumber.plugin.event.TestStepFinished;
 import lombok.extern.slf4j.Slf4j;
+import org.apiguardian.api.API;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import ch.qos.logback.classic.Level;
@@ -18,6 +22,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 import static com.example.global.GlobalMapKey.FOLDR_ID;
+import static com.example.hook.listeners.CucumberAllureStepListener.attachScreenshot;
 
 /**
  * Создаёт отдельный лог-файл для каждого сценария;
@@ -104,10 +109,10 @@ public class HookBeforeStep {
 
     @Before
     public void setUp(Scenario scenario) {
-        if (!scenario.getSourceTagNames().contains("@API")) {
+        if (!scenario.getSourceTagNames().contains("@API") && !scenario.getSourceTagNames().contains("@SQL")) {
             browser.getDriver();// Инициализация драйвера
         } else {
-            log.info("API тест — браузер не запускается");
+            log.info("Не UI тест — браузер не запускается");
         }
     }
 

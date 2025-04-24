@@ -10,7 +10,6 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import retrofit2.Response;
 
 import java.util.List;
@@ -39,7 +38,6 @@ public class SQLSteps {
     private Map<String, String> contactInfo;
 
 
-
     @Given("User query for all users in {string} table")
     public void queryAllInfo(String tableName) {
         results = dBUtils.findAll(tableName);
@@ -47,22 +45,20 @@ public class SQLSteps {
     }
 
 
-
-
     @Then("User should get {int} users")
     public void verifyCount(int expected) {
-        assertThat(results.size(), is(expected),false);
+        assertThat(results.size(), is(expected), false);
     }
 
 
     @Given("Details from {string} table")
     public void contactDetailsFromTable(String tableName, DataTable dataTable) {
-        Object  fields;
+        Object fields;
         selectorInDB = apiSteps.toFieldMap(dataTable);
 
         if (Objects.equals(tableName, "Accounts")) {
             fields = new User();
-        }else {
+        } else {
             fields = new Contact();
         }
 

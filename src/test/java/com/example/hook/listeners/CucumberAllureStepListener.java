@@ -83,7 +83,7 @@ public class CucumberAllureStepListener implements EventListener {
      * Если драйвер не инициализирован — прикладывается соответствующее сообщение.
      */
     public static void attachScreenshot(String stepText) {
-        WebDriver driver = DriverManager.getDriverLis(); // Получаем текущий WebDriver из потока
+        WebDriver driver = DriverManager.getDriver(); // Получаем текущий WebDriver из потока
 
         if (driver == null) {
             Allure.addAttachment("Screenshot Failed", "text/plain", "Driver is null");
