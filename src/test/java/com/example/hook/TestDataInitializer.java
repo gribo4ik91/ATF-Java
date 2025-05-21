@@ -4,6 +4,7 @@ import com.example.global.data.DataGenerator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +14,18 @@ import static com.example.global.GlobalMapKey.*;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @Service
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @Slf4j
 public class TestDataInitializer {
 
     private final DataGenerator dataGenerator;
     private final Environment env;
+
+    @Autowired
+    public TestDataInitializer(DataGenerator dataGenerator, Environment env) {
+        this.dataGenerator = dataGenerator;
+        this.env = env;
+    }
 
     public void initializeGlobalMap() {
         assertNotNull(dataGenerator, "DataGenerator must not be null");

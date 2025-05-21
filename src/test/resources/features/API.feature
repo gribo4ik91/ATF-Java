@@ -63,7 +63,7 @@ Feature:  API Tests
     And New user can log out
     Then the response status code should be '200'
 
-  @UI6
+
   Scenario: Login and delete  new user successfully
     When New user is created with the following details:
       | Fields    | Values               |

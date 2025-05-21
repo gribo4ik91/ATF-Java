@@ -6,12 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.env.Environment;
+import org.springframework.stereotype.Controller;
 
 import java.util.Map;
 
 import static com.example.global.GlobalMapKey.HTTP_RESPONSE_BODY;
 
-
+@Controller
 @SpringBootTest
 public class RetrofitServices extends RetrofitFactory {
 

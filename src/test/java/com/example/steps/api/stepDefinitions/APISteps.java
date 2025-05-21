@@ -34,14 +34,25 @@ import static java.util.Objects.requireNonNull;
 @Slf4j
 public class APISteps {
 
+    private final Comparator auth;
+    private final RetrofitServices retrofit;
 
     private Response<?> response;
 
-    @Autowired
-    private RetrofitServices retrofit;
 
     @Autowired
-    private Comparator auth;
+    public APISteps(Comparator auth, RetrofitServices retrofit) {
+        this.auth = auth;
+        this.retrofit = retrofit;
+    }
+
+
+
+//    @Autowired
+//    private RetrofitServices retrofit;
+
+//    @Autowired
+//    private Comparator auth;
 
     @Autowired
     private ObjectMapper objectMapper;

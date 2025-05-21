@@ -3,6 +3,7 @@ package com.example.global.data;
 import net.datafaker.Faker;
 import org.springframework.beans.factory.annotation.Value;
 import org.apache.commons.lang3.RandomUtils;
+import org.springframework.stereotype.Component;
 
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
@@ -11,7 +12,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-
+@Component
 public class DataGenerator {
 
     @Value("${domain}")

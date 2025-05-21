@@ -18,10 +18,10 @@ import org.junit.platform.suite.api.Suite;
 @IncludeEngines("cucumber") // Используем Cucumber как движок для выполнения тестов
 @SelectClasspathResource("features") // Папка, в которой хранятся .feature-файлы
 @ConfigurationParameter(key = "cucumber.glue", value = "com.example.steps") // Пакет, где находятся step definition'ы и хуки
-@ConfigurationParameter(key = "cucumber.filter.tags", value = "@API") // Выполнять только сценарии, помеченные тегом @API
+@ConfigurationParameter(key = "cucumber.filter.tags", value = "@ui2") // Выполнять только сценарии, помеченные тегом @API
 @ConfigurationParameter(
         key = "cucumber.plugin",
-        value = "pretty, summary, html:target/cucumber-reports.html, json:target/cucumber.json, io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
+        value = "pretty, summary, html:target/cucumber-reports.html, json:target/cucumber.json,  com.example.hook.listeners.CucumberAllureStepListener,io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
 ) // Подключение репортов: HTML, JSON и Allure
 @ConfigurationParameter(key = "cucumber.execution.monochrome", value = "true") // Отключает цветной вывод (удобно в CI)
 @ConfigurationParameter(key = "cucumber.execution.step-notifications", value = "true") // Показывает шаги в выводе при запуске

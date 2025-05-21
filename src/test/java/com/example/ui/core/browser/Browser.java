@@ -9,7 +9,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.reflect.FieldUtils;
-import org.openqa.selenium.*;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -18,17 +19,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
-import org.springframework.context.annotation.Scope;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Nullable;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.time.Duration;
 import java.util.Objects;
-import java.util.Set;
 
 import static com.example.ATFAssert.assertNotNull;
 import static com.example.ATFAssert.fail;
@@ -44,8 +41,8 @@ import static org.hamcrest.Matchers.containsString;
  * с браузером в автоматизированных UI-тестах. Он управляет жизненным циклом WebDriver,
  * инициализацией страниц, выполнением JavaScript, проверкой URL и динамическим поиском элементов.</p>
  */
-@Component
-@Scope("scenario") // Создание нового экземпляра Browser для каждого сценария (Cucumber)
+//@Component
+//@Scope("scenario") // Создание нового экземпляра Browser для каждого сценария (Cucumber)
 @Slf4j
 public class Browser implements IBrowser {
 
@@ -100,7 +97,6 @@ public class Browser implements IBrowser {
     }
 
 
-
     /**
      * Ищет страницу по её имени через аннотацию @Page.
      */
@@ -121,6 +117,7 @@ public class Browser implements IBrowser {
         }
         return null;
     }
+
     /**
      * Выполняет переход по заданному URL в открытом браузере.
      * Если WebDriver не инициализирован или сессия завершена — выбрасывает исключение.

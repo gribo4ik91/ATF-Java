@@ -39,6 +39,9 @@ public class CucumberAllureStepListener implements EventListener {
      */
     private void handleStepFinished(TestStepFinished event) {
         if (event.getResult().getStatus() == Status.PASSED || event.getResult().getStatus() == Status.FAILED) {
+             //Это замена вот такой конструкции:
+             //if (event.getTestStep() instanceof PickleStepTestStep)
+             // PickleStepTestStep step = (PickleStepTestStep) event.getTestStep();
             if (event.getTestStep() instanceof PickleStepTestStep step) {
                 String stepText = step.getStep().getText();
 

@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Scope;
 import org.springframework.core.env.Environment;
 
 import java.util.Map;
@@ -25,22 +26,27 @@ import static java.lang.String.format;
 import static org.hamcrest.CoreMatchers.is;
 
 
-@CucumberContextConfiguration
-@SpringBootTest
+
 @Slf4j
 public class UiSteps {
-
+    private final ManageDataTable manageDataTable;
+    private final Browser browser;
+    private final Environment env;
 
     @DataTableType(replaceWithEmptyString = {"-empty-", "-blank-"})
     public DataTable defaultDatatable(DataTable dataTable) {
         return manageDataTable.overrideData(dataTable);
     }
 
-    @Autowired
-    private Browser browser;
 
     @Autowired
-    private ManageDataTable manageDataTable;
+    public UiSteps(Browser browser, ManageDataTable manageDataTable, Environment env) {
+        this.browser = browser;
+        this.manageDataTable = manageDataTable;
+        this.env = env;
+    }
+
+
 
     @Value("${default.ui.page.timeout}")
     private int defaultUiPageTimeout;
@@ -48,8 +54,8 @@ public class UiSteps {
     @Value("${default.ui.timeout}")
     private int defaultUiTimeout;
 
-    @Autowired
-    private Environment env;
+//    @Autowired
+//    private Environment env;
 
 
     @Given("I am on the {string} page")

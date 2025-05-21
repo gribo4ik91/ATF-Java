@@ -2,7 +2,6 @@
 Feature:  SQl Tests
 
 #Contact
-  @UI5
   Scenario: The newly created user present in DB
     Given Details from "Contact" table
       | Fields        | Values                     |
@@ -23,12 +22,11 @@ Feature:  SQl Tests
 
 
 #User
-  @UI2
   Scenario: Select all users
     Given User query for all users in "Accounts" table
     Then User should get 2 users
 
-  @UI5
+
   Scenario: The newly created user present in DB
     Given Details from "Accounts" table
       | Fields    | Values                |

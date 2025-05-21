@@ -2,14 +2,14 @@ package com.example.api;
 
 import com.example.api.models.Contact;
 import com.example.api.models.User;
+import org.springframework.stereotype.Component;
 
 import static com.example.ATFAssert.assertAll;
 import static com.example.ATFAssert.assertThat;
 import static org.hamcrest.text.IsEqualIgnoringCase.equalToIgnoringCase;
 
-
+@Component
 public class Comparator {
-
 
 
     public void compareUsers(User user, User userObjectResponse) {
@@ -17,8 +17,9 @@ public class Comparator {
         assertThat("User 'firstName' field does not match", userObjectResponse.getFirstName(), equalToIgnoringCase(user.getFirstName()), true);
         assertThat("User 'lastName' field does not match", userObjectResponse.getLastName(), equalToIgnoringCase(user.getLastName()), true);
         assertThat("User 'email' field does not match", userObjectResponse.getEmail(), equalToIgnoringCase(user.getEmail()), true);
-assertAll();
+        assertAll();
     }
+
     public void compareContact(Contact user, Contact userObjectResponse) {
 
         assertThat("User 'firstName' field does not match", userObjectResponse.getFirstName(), equalToIgnoringCase(user.getFirstName()), true);
@@ -31,7 +32,7 @@ assertAll();
         assertThat("User 'city' field does not match", userObjectResponse.getCity(), equalToIgnoringCase(user.getCity()), true);
         assertThat("User 'stateProvince' field does not match", userObjectResponse.getStateProvince(), equalToIgnoringCase(user.getStateProvince()), true);
         assertThat("User 'postalCode' field does not match", userObjectResponse.getPostalCode(), equalToIgnoringCase(user.getPostalCode()), true);
-   assertAll();
+        assertAll();
     }
 
 

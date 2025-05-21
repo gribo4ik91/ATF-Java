@@ -38,41 +38,41 @@ public class BeansConfig {
                 .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .findAndRegisterModules();
     }
-
+//
     @Bean
     public WebDriverConfig webDriverConfig() {
 
         return new WebDriverConfig();
     }
-
-
-
+//
+//
+//
     @Bean
     public WebDriver driver(WebDriverConfig webDriverConfig) {
             return webDriverConfig.driver();
     }
 
-    @Bean
-    public ManageDataTable manageDataTable() {
-        return new ManageDataTable();
-    }
+//    @Bean
+//    public ManageDataTable manageDataTable() {
+//        return new ManageDataTable();
+//    }
 
-    @Bean
-    public DataGenerator dataGenerate() {
-        return new DataGenerator();
-    }
+//    @Bean
+//    public DataGenerator dataGenerate() {
+//        return new DataGenerator();
+//    }
 
-    @Bean
-    public PlaceholderReplacer hashParamReplacer() {
-        return new PlaceholderReplacer();  }
+//    @Bean
+//    public PlaceholderReplacer hashParamReplacer() {
+//        return new PlaceholderReplacer();  }
 
-    @Bean
-    public RetrofitServices retrofitServices() {
-        return new RetrofitServices();
-    }
+//    @Bean
+//    public RetrofitServices retrofitServices() {
+//        return new RetrofitServices();
+//    }
 
-    @Bean
-    public Comparator integrationAuth() {
-        return new Comparator();
-    }
+//    @Bean
+//    public Comparator integrationAuth() {
+//        return new Comparator();
+//    }
 }

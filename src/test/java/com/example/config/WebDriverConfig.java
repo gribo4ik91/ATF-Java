@@ -1,6 +1,9 @@
 package com.example.config;
 
+import dev.failsafe.Failsafe;
+import dev.failsafe.RetryPolicy;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -8,15 +11,9 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-
-import dev.failsafe.Failsafe;
-import dev.failsafe.RetryPolicy;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import org.springframework.beans.factory.annotation.Value;
-
 
 import java.time.Duration;
 import java.util.function.Supplier;
@@ -29,10 +26,10 @@ import java.util.function.Supplier;
  * Поддерживается: Chrome, Chrome Headless, Firefox, Firefox Headless, Edge.
  * Также добавлен shutdown hook для корректного завершения сессии при завершении JVM.</p>
  */
-
+@Slf4j
 public class WebDriverConfig {
 
-    private static final Logger log = LoggerFactory.getLogger(WebDriverConfig.class);
+
 
     /**
      * Тип браузера, передается из `application.properties`.

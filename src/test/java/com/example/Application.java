@@ -1,7 +1,11 @@
 package com.example;
 
+import io.cucumber.spring.CucumberContextConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 
 @SpringBootApplication(scanBasePackages = "com.example")

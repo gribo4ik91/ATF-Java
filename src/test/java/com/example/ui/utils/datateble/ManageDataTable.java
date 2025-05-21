@@ -8,6 +8,7 @@ import io.cucumber.datatable.DataTableTypeRegistry;
 import io.cucumber.datatable.DataTableTypeRegistryTableConverter;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +26,17 @@ import static org.hamcrest.CoreMatchers.is;
  * - Преобразует DataTable с заменой данных;
  * - Проверяет, включены или исключены записи в таблице на UI.</p>
  */
+@Component
 public class ManageDataTable {
 
+    private final PlaceholderReplacer placeholderReplacer;
+
     @Autowired
-    private PlaceholderReplacer placeholderReplacer;
+    public ManageDataTable(PlaceholderReplacer placeholderReplacer) {
+        this.placeholderReplacer = placeholderReplacer;
+    }
+//    @Autowired
+//    private PlaceholderReplacer placeholderReplacer;
 
     private static final DataTableTypeRegistry registry = new DataTableTypeRegistry(Locale.ENGLISH);
     private static final DataTable.TableConverter tableConverter = new DataTableTypeRegistryTableConverter(registry);

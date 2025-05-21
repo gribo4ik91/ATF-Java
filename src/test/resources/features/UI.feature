@@ -1,7 +1,7 @@
 @UI
 Feature: UI tests
 
-  @UI4
+@ui2
   Scenario: Create a new user
     Given User navigates to the login page
     Then User is on the 'Portal Login' page
