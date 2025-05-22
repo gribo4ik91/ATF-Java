@@ -34,7 +34,7 @@ src
 │
 ├── resources
 │   ├── features                 # Cucumber .feature files
-│   └── *.properties             # Configuration files
+│   └── env/*.properties             # Configuration files
 │   └── sql                      # Configuration files for sql
 ```
 
