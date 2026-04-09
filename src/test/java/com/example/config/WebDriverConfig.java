@@ -107,7 +107,7 @@ public class WebDriverConfig {
                 driverSupplier = () -> {
                     WebDriverManager.chromedriver().setup();
                     ChromeOptions options = new ChromeOptions();
-                    options.addArguments("--headless=new");
+                    options.addArguments("--headless=true");
                     options.addArguments("--start-maximized");
                     log.info("Launching Chrome with GUI");
                     return new ChromeDriver(options);
