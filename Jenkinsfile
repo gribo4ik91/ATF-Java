@@ -10,12 +10,13 @@ pipeline {
     stages {
         stage('Env Prep') {
             steps {
-                if (isUnix()) {
-                    sh 'mvn -version'
-                } else {
-                    bat 'mvn -version'
+                script {
+                    if (isUnix()) {
+                        sh 'mvn -version'
+                    } else {
+                        bat 'mvn -version'
+                    }
                 }
-
             }
         }
 
@@ -27,11 +28,12 @@ pipeline {
                 checkout scm
 
                 // Теперь Maven точно найдет pom.xml
-
-                if (isUnix()) {
-                    sh 'mvn clean test -Dtest=CucumberTestRunner'
-                } else {
-                    bat 'mvn clean test -Dtest=CucumberTestRunner'
+                script {
+                    if (isUnix()) {
+                        sh 'mvn clean test -Dtest=CucumberTestRunner'
+                    } else {
+                        bat 'mvn clean test -Dtest=CucumberTestRunner'
+                    }
                 }
 
             }
