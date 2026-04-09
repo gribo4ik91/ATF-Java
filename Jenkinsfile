@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     tools {
+        jdk 'jdk21'
         maven "M391"
         // Добавь это (имя должно совпадать с тем, что в Global Tool Configuration)
         allure "allure2"
